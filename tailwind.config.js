@@ -1,10 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./App.tsx"
+    "./src/components/*.tsx",
+    "./src/screens/*.tsx",
+
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'backGround': "#D7FFF8E5",
+        'boldColor': "#6A8E86"
+      }
+    },
   },
   plugins: [],
 }
