@@ -1,8 +1,7 @@
 
 
 import { NativeBaseProvider, StatusBar } from 'native-base'
-
-import {Home} from './src/screens/Home'
+import { Routes } from './src/routes/app';
 
 export default function App() {
   return (
@@ -13,7 +12,7 @@ export default function App() {
         translucent
       />
 
-      <Home/>
+      <Routes/>
     </NativeBaseProvider>
   );
 }
