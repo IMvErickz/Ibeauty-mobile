@@ -9,6 +9,8 @@ export function Inpuut({placeholder, ...rest}: InputProps) {
         <Input
             placeholder={placeholder}
             backgroundColor="#F1F1F1"
+            borderWidth='0'
+            color={'black'}
             {...rest}
         />
     )
