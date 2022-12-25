@@ -1,12 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { AppRoutes } from './app.route'
-import {Client} from '../screens/registerClient'
+import {Provider} from '../screens/registerProvider'
 
 
 export function Routes() {
     return (
         <NavigationContainer>
-            <Client/>
+            <Provider/>
         </NavigationContainer>
     )
 }

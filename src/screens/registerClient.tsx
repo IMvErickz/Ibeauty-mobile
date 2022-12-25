@@ -42,27 +42,27 @@ export  function Client(){
                 />
             </VStack>
 
-            <VStack className='w-full flex flex-col itens-center justify-center'>
+            <VStack className='w-full flex flex-col items-center justify-center'>
                 <Text className='text-black font-semibold text-4xl'>Dados de Login</Text>
             </VStack>
 
-            <VStack flex={1} justifyContent='center' alignItems={'center'} className='flex flex-col itens-center justify-center w-full'>
-                <VStack className='w-full flex flex-col itens-start justify-start'>
+            <VStack flex={1} justifyContent='center' alignItems={'center'} className='flex flex-col items-center justify-center w-full'>
+                <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Email</Text>
                 </VStack>
                 <Inpuut width={'381'} />
                 
-                <VStack className='w-full flex flex-col itens-start justify-start'>
+                <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Confirme seu Email</Text>
                 </VStack>
                 <Inpuut width={'381'} />
                 
-                <VStack className='w-full flex flex-col itens-start justify-start'>
+                <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Senha</Text>
                 </VStack>
                 <Inpuut width={'381'} />
                 
-                <VStack className='w-full flex flex-col itens-start justify-start'>
+                <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Confirme sua Senha</Text>
                 </VStack>
                 <Inpuut width={'381'} />
@@ -75,7 +75,7 @@ export  function Client(){
                             
                 </VStack>
 
-                <VStack className='w-full flex flex-row itens-start justify-start'>
+                <VStack className='w-full flex flex-row items-start justify-start'>
                            
                             <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                                  <Text className='text-black font-bold text-xl'>Concordo em receber notificações de Ofertas e Produtos</Text>
