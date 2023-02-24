@@ -3,12 +3,12 @@ import { Buttoon } from '../components/Button'
 import { Header } from '../components/header'
 import { Inpuut } from '../components/input'
 
-export  function Client(){
+export function Client(){
     return (
         <FormControl>
             <ScrollView>
-        <VStack className='w-screen h-screen flex flex-col items-center justify-center bg-white'>
-            <VStack className='w-full flex flex-col items-center justify-center gap-y-5'>
+        <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"} className="bg-white">
+            <VStack w="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
                 <Header
                 text='Novo Cliente'
             />

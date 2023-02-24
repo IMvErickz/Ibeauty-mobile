@@ -6,7 +6,7 @@ import {Provider} from '../screens/registerProvider'
 export function Routes() {
     return (
         <NavigationContainer>
-            <Provider/>
+            <AppRoutes/>
         </NavigationContainer>
     )
 }

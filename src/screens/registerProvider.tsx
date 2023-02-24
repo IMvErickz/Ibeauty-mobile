@@ -1,4 +1,4 @@
-import { FormControl, VStack, Text, Checkbox  } from "native-base";
+import { FormControl, VStack, Text, Checkbox, ScrollView  } from "native-base";
 import { Buttoon } from "../components/Button";
 import { Header } from "../components/header";
 import { Inpuut } from "../components/input";
@@ -7,8 +7,9 @@ import { Selection } from "../components/Select";
 export function Provider() {
     return (
         <FormControl>
-            <VStack className="w-screen h-screen flex flex-col items-center justify-center">
-                <VStack className="w-full flex flex-col itens-center justify-center">
+            <ScrollView>
+            <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"} className="bg-white">
+                <VStack w="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
                     <Header
                         text="Novo Prestador"
                 />
@@ -65,7 +66,7 @@ export function Provider() {
                     <Inpuut/>
                 </VStack>
 
-                <VStack className='w-full flex flex-row items-start justify-start'>
+                <VStack className='w-80 flex flex-row items-start justify-start'>
                             
                             <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                                     <Text className='text-black font-bold text-xl'>Eu li e concordo com os</Text>
@@ -73,7 +74,7 @@ export function Provider() {
                             
                 </VStack>
 
-                <VStack className='w-full flex flex-row items-start justify-start'>
+                <VStack className='w-80 flex flex-row items-start justify-start'>
                            
                             <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                                  <Text className='text-black font-bold text-xl'>Concordo em receber notificações de Ofertas e Produtos</Text>
@@ -86,6 +87,7 @@ export function Provider() {
                     />
                 </VStack>
             </VStack>
+            </ScrollView>
         </FormControl>
     )
 }
