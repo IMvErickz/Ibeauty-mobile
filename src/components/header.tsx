@@ -2,7 +2,7 @@ import { VStack, Text } from "native-base";
 import React from "react";
 
 export interface HeaderProps{
-    text: string
+    text?: string
 }
 
 export function Header(props: HeaderProps) {
