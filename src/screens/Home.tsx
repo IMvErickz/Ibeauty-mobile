@@ -24,12 +24,12 @@ export function Home() {
                     Selecione a opção que você se encaixe!
                 </Text>
                 </VStack>
-                <Link to={{screen: "Client"}}>
+                
                 <Buttoon
                 tittle='Cliente'
                         className="bg-boldColor w-80 p-3"
                         onPress={() => {navigation.navigate("Client")}}
-            /></Link>
+            />
 
             <Buttoon
                 tittle='Profissionais'

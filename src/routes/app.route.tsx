@@ -12,13 +12,10 @@ const {Navigator, Screen} = createNativeStackNavigator();
 export function AppRoutes() {
     return (
         
-        // <Navigator>
-        //     {/* <Screen name='/' component={Home} options={{ headerShown: false }} />
-        //     <Screen name='Client' component={Client} options={{ headerShown: false }} />
-        //     <Screen name='Provider' component={Provider} options={{ headerShown: false }} /> */}
-        //     <Client/>
-        // </Navigator>
-        <Initial/>
-     
+        <Navigator>
+            <Screen name='/' component={Home} options={{ headerShown: false }} />
+            <Screen name='Client' component={Client} options={{ headerShown: false }} />
+            <Screen name='Provider' component={Provider} options={{ headerShown: false }} />
+        </Navigator>
     )
 }
