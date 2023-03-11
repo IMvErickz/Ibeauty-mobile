@@ -1,12 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { AppRoutes } from './app.route'
-import {Provider} from '../screens/registerProvider'
+import { Provider } from '../screens/registerProvider'
+import {QueryClientProvider } from 'react-query'
+import { queryClient } from '../../lib/query'
 
 
 export function Routes() {
     return (
         <NavigationContainer>
-            <AppRoutes/>
+            <QueryClientProvider client={queryClient}>
+                <AppRoutes/>
+            </QueryClientProvider>       
         </NavigationContainer>
     )
 }

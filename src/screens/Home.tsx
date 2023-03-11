@@ -28,13 +28,13 @@ export function Home() {
                 <Buttoon
                 tittle='Cliente'
                         className="bg-boldColor w-80 p-3"
-                        onPress={() => {navigation.navigate("Client")}}
+                        onPress={() => {navigation.navigate('auth')}}
             />
 
             <Buttoon
                 tittle='Profissionais'
                 className="bg-boldColor w-80 p-3"
-                onPress={() => {navigation.navigate('Provider')}}
+                onPress={() => {navigation.navigate('auth')}}
             />
             </VStack>
         </VStack>
