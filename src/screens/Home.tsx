@@ -1,6 +1,7 @@
 import { VStack, Text } from 'native-base'
 import { Buttoon } from '../components/Button'
 import { Link, useNavigation } from '@react-navigation/native';
+import { ButtonHome } from '../components/ButtonHome';
 
 //const navigation = useNavigation()
 
@@ -25,16 +26,16 @@ export function Home() {
                 </Text>
                 </VStack>
                 
-                <Buttoon
+                <ButtonHome
                 tittle='Cliente'
                         className="bg-boldColor w-80 p-3"
-                        onPress={() => {navigation.navigate('auth')}}
+                        onPressIn={() => {navigation.navigate('auth')}}
             />
 
-            <Buttoon
+            <ButtonHome
                 tittle='Profissionais'
                 className="bg-boldColor w-80 p-3"
-                onPress={() => {navigation.navigate('auth')}}
+                onPressIn={() => {navigation.navigate('auth')}}
             />
             </VStack>
         </VStack>
