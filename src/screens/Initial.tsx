@@ -12,8 +12,9 @@ import {MapPin} from 'phosphor-react-native'
 import { Header } from "../components/header";
 
 interface ProductsProps{
-    Name: string
+    nomeProduto: string
     img: string
+    preco: number
 }
 
 export function Initial() {
@@ -28,7 +29,7 @@ export function Initial() {
     const { data } = useQuery<ProductsProps[]>('Services', async () => {
         const response = await api.get('/products')
 
-        return response.data.products
+        return response.data.getAllProducts
     })
 
    
@@ -39,13 +40,14 @@ export function Initial() {
             <VStack w="full" alignItems={"center"} justifyContent={'center'}>
                 <Header/>
             </VStack>
-            <VStack w="full" alignItems={'center'} justifyContent="center" display={'flex'} flexDirection="column" className="p-24" bg={'white'}>
+            <VStack w="full" h="full" alignItems={'center'} justifyContent="center" display={'flex'} flexDirection="column" className="p-24" bg={'white'}>
                     {data?.map(e => {
                         return (
                             <CardInitial
-                                key={e.Name}
-                                Name={e.Name}
+                                key={e.nomeProduto}
+                                Name={e.nomeProduto}
                                 img={e.img}
+                                preco={e.preco}
                             />
                     )
                 })}

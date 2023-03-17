@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native'
 interface CardProps{
     Name: string
     img?: string
+    preco: number
 }
 
 export function CardInitial(props: CardProps) {
@@ -28,7 +29,7 @@ export function CardInitial(props: CardProps) {
                 <Text className="font-semibold text-xl">{props.Name}</Text>
             </VStack>
             <VStack>
-                <Text className="font-semibold text-xl">Preço</Text>
+                        <Text className="font-semibold text-xl">{props.preco}</Text>
             </VStack>
             </VStack>
         </VStack>

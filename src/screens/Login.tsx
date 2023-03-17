@@ -6,18 +6,19 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
 
-interface LoginProps{
-    Title: string
-}
-
-export function Login(props: LoginProps) {
+export function Login() {
 
     const [tittle, setTittle] = useState('')
 
     async function setPageName() {
-        let name = await AsyncStorage.getItem('LocalAuth')
+        try {
+            let name = await AsyncStorage.getItem('LocalAuth')
 
-        setTittle(name as string)
+            setTittle(name as string)
+        } catch (error) {
+            alert(error)
+            throw error
+        }
     }
 
     const navigation = useNavigation()
@@ -66,6 +67,7 @@ export function Login(props: LoginProps) {
                         tittle="Entrar"
                         color="boldColor"
                         className="w-96 text-center"
+                        onPress={() => navigation.navigate('change')}
                     />
                 </VStack>
             </VStack>
