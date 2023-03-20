@@ -1,10 +1,47 @@
-import { FormControl, VStack, Text, Checkbox, ScrollView  } from "native-base";
+import { FormControl, VStack, Text, Checkbox, ScrollView, Input  } from "native-base";
+import { FormEvent, useState, } from "react";
+import {TextInput} from 'react-native'
+import { api } from "../../lib/axios";
 import { Buttoon } from "../components/Button";
 import { Header } from "../components/header";
 import { Inpuut } from "../components/input";
 import { Selection } from "../components/Select";
 
 export function Provider() {
+
+    const [CNPJ, setCNPJ] = useState('')
+    const [Nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [Senha, setSenha] = useState('')
+    const [confSenha, setConfSenha] = useState('')
+    const [img, setImg] = useState('')
+    const [telefone, setTel] = useState('')
+    const [cep, setCep] = useState('')
+    const [numero, setNumero] = useState('')
+
+    async function setProvider() {
+
+        try {
+            if (Senha != confSenha) {
+                alert("por favor verifique a senha")
+            } else {
+                const provider = await api.post('/provider/register', {
+                    CNPJ,
+                    Nome,
+                    email,
+                    Senha,
+                    img,
+                    telefone,
+                    cep, 
+                    numero
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    }
+    
     return (
         <FormControl>
             <ScrollView>
@@ -21,12 +58,14 @@ export function Provider() {
                     <Inpuut
                         width={'190'}
                         marginRight={'2'}
-                        placeholder='Nome do estabelecimento'
+                            placeholder='Nome do estabelecimento'
+                            onChangeText={setNome}
                     />
 
                      <Inpuut
                     width={'190'}
-                    placeholder='CPF ou CNPJ'
+                            placeholder='CPF ou CNPJ'
+                            onChangeText={setCNPJ}
                     />
                 </VStack>
 
@@ -34,13 +73,16 @@ export function Provider() {
                     <Inpuut
                         width={'190'}
                         marginRight={'2'}
-                        placeholder='Telefone'
+                            placeholder='Telefone'
+                            onChangeText={setTel}
                     />
 
                      <Inpuut
                     width={'190'}
-                    placeholder='CEP'
-                    />
+                            placeholder='CEP'
+                            onChangeText={setCep}
+                        />
+                         
                 </VStack>
                 
                 <VStack className="w-full flex flex-col items-center justify-center p-5">
@@ -51,20 +93,26 @@ export function Provider() {
                     <Text className="text-black font-semibold text-4xl">Dados de login:</Text>
                 </VStack>
                 
-                <VStack className="w-full flex flex-col items-center justify-center p-5 ">
+                    <VStack className="w-full flex flex-col items-center justify-center p-5 ">
+                    <Inpuut
+                    width={'190'}
+                            placeholder='Número'
+                            onChangeText={setNumero}
+                    />
                     <VStack className="w-full flex flex-col items-start, justify-start">
                         <Text>Email</Text>
                     </VStack>
-                    <Inpuut />
+                        <Inpuut onChangeText={setEmail} />
                     <VStack className="w-full flex flex-col items-start, justify-start">
                         <Text>Senha</Text>
                     </VStack>
-                    <Inpuut />
+                    <Inpuut onChangeText={setSenha}/>
                     <VStack className="w-full flex flex-col items-start, justify-start">
                         <Text>Confirme sua senha</Text>
                     </VStack>
-                    <Inpuut/>
-                </VStack>
+                        <Inpuut onChangeText={setConfSenha}/>
+                    </VStack>
+                    <Inpuut placeholder="img" onChangeText={setImg} />
 
                 <VStack className='w-80 flex flex-row items-start justify-start'>
                             
@@ -83,7 +131,8 @@ export function Provider() {
                 <VStack className="w-full flex flex-col items-center justify-center">
                     <Buttoon
                         tittle="Confirmar cadastro"
-                        bg='#4D4D4D'
+                            bg='#4D4D4D'
+                            onPress={setProvider}
                     />
                 </VStack>
             </VStack>
