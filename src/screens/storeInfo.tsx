@@ -4,6 +4,7 @@ import { CardProducts } from '../components/cardProductsServices.tsx'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
 import { api } from "../../lib/axios";
+import { useQuery } from "react-query";
 
 interface SericoProps{
     NomeServico: string
@@ -13,23 +14,23 @@ interface SericoProps{
 interface ServiceProps{
     servico: SericoProps[]
     Nome: string
+    img: string
 }
 
-export function Store({ servico, ...rest }: ServiceProps) {
-
-    const [services, setServices] = useState<ServiceProps[]>([])
+export function Store({ servico, Nome, img, ...rest }: ServiceProps) {
+    
     const [name, setName] = useState('')
-
     async function StoreServices() {
      let nameLocal = await AsyncStorage.getItem('StoreName')
         setName(nameLocal as string)
         //console.log(name)
     }
 
-    api.get(`/services/${name}`)
-        .then(function (response) {
-        setServices(response.data.services)
-        })
+    const {data} = useQuery<ServiceProps[]>('ServiceProvider', async () => {
+        const response = await api.get(`/services/${name}`)
+
+        return response.data.services
+    })
     
     StoreServices()
     
@@ -39,7 +40,7 @@ export function Store({ servico, ...rest }: ServiceProps) {
                 <VStack w="full" alignItems={"center"} justifyContent={'center'}>
                     <Header/>
                 </VStack>
-                {services.map(e => {
+                {data?.map(e => {
                     return (
                         <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-4'>
                             <Text className="font-bold text-xl">{e.Nome}</Text>
