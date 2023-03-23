@@ -4,11 +4,17 @@ import { Header } from "../components/header";
 import { Inpuut } from "../components/input";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../../lib/axios";
+
+interface DataProps{
+    Senha: string
+}
 
 export function Login() {
 
     const [tittle, setTittle] = useState('')
+    //console.log(tittle)
 
     async function setPageName() {
         try {
@@ -23,7 +29,7 @@ export function Login() {
 
     const navigation = useNavigation()
 
-    let local
+    let local: any
 
     async function LocalAuth() {
         local = await AsyncStorage.getItem('LocalAuth')
@@ -35,7 +41,39 @@ export function Login() {
         }
     }
     setPageName()
+    
+    const [route, setRoute] = useState('')
+    //console.log(route)
+    const [email, getEmail] = useState('')
+    const [pass, getPass] = useState('')
+    const [data, getResponseData] = useState<DataProps[]>([])
 
+    useEffect(() => {
+        if (tittle == "Cliente") {
+            setRoute("client")
+        } else {
+            setRoute('provider')
+        }
+    })
+
+    async function SetLogin() {
+        try {
+            const login = await api.get(`/${route}/${email}`)
+                .then(function (response) {
+                getResponseData(response.data.userInfo)
+                })
+            data.map(e => {
+                if (e.Senha != pass) {
+                    alert('Email ou senha incorretos')
+                } else {
+                    navigation.navigate('change')
+                }
+            })
+        } catch (error) {
+            console.error(error)
+            throw error
+       }
+    }
     return (
         <VStack
             className='bg-white' w="full" h="full" alignItems={'center'}>
@@ -48,12 +86,15 @@ export function Login() {
                 <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
                     <Inpuut width={'96'} height={'16'} placeholder='Email'
                     className="placeholder:font-bold placeholder:text-2xl"
+                    onChangeText={getEmail}
                     />
                 </VStack>
 
                 <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
                     <Inpuut width={'96'} height={'16'} placeholder='Senha'
                     className="placeholder:font-bold placeholder:text-2xl"
+                    onChangeText={getPass}
+                    type="password"
                     />
                 </VStack>
 
@@ -67,7 +108,7 @@ export function Login() {
                         tittle="Entrar"
                         color="boldColor"
                         className="w-96 text-center"
-                        onPress={() => navigation.navigate('change')}
+                        onPress={SetLogin}
                     />
                 </VStack>
             </VStack>
