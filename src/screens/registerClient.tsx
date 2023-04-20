@@ -2,6 +2,8 @@ import {Text, VStack, ScrollView, FormControl, Checkbox} from 'native-base'
 import { Buttoon } from '../components/Button'
 import { Header } from '../components/header'
 import { Inpuut } from '../components/input'
+import { Eye } from 'phosphor-react-native'
+import { ButtonBack } from '../components/buttonBack'
 
 export function Client(){
     return (
@@ -60,12 +62,16 @@ export function Client(){
                 <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Senha</Text>
                 </VStack>
-                <Inpuut width={'381'} />
+                        <Inpuut width={'381'}
+                        RightIcon={<Eye size={32} color="black" weight="fill" style={{marginRight: 12}} />}
+                        />
                 
                 <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Confirme sua Senha</Text>
                 </VStack>
-                <Inpuut width={'381'} />
+                        <Inpuut width={'381'}
+                        RightIcon={<Eye size={32} color="black" weight="fill" style={{marginRight: 12}} />}
+                        />
 
                 <VStack className='w-full flex flex-row items-start justify-start'>
                             
@@ -87,7 +93,10 @@ export function Client(){
                             bg='#4D4D4D'
                             width={'341'}
                 />
-            </VStack>
+                    </VStack>
+                    <VStack className='w-full flex flex-col items-start justify-start'>
+                        <ButtonBack/>
+                    </VStack>
             </VStack>
     </ScrollView>
         </FormControl>

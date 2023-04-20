@@ -12,7 +12,8 @@ module.exports = {
         'boldColor': "#6A8E86",
         'bgInput': "#F1F1F1",
         'bgLight': '#E5E5E5',
-        'borderColor': '#D9D9D9'
+        'borderColor': '#D9D9D9',
+        'LabelColor': '#416058'
       }
     },
   },

@@ -1,4 +1,4 @@
-import { FormControl, VStack, Text, Checkbox, ScrollView, Input  } from "native-base";
+import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button  } from "native-base";
 import { FormEvent, useState, } from "react";
 import {TextInput} from 'react-native'
 import { api } from "../../lib/axios";
@@ -6,8 +6,14 @@ import { Buttoon } from "../components/Button";
 import { Header } from "../components/header";
 import { Inpuut } from "../components/input";
 import { Selection } from "../components/Select";
+import { ArrowFatLeft, Eye, IconProps } from "phosphor-react-native";
+import {useNavigation} from '@react-navigation/native'
+import { ButtonBack } from "../components/buttonBack";
+import { Icon } from '@iconify/react';
 
 export function Provider() {
+
+    const navigation = useNavigation()
 
     const [CNPJ, setCNPJ] = useState('')
     const [Nome, setNome] = useState('')
@@ -24,6 +30,8 @@ export function Provider() {
         try {
             if (Senha != confSenha) {
                 alert("por favor verifique a senha")
+            } else if (Senha.length < 8) {
+                alert("Por favor, senha com no mínimo 8 caractéres.")
             } else {
                 const provider = await api.post('/provider/register', {
                     CNPJ,
@@ -106,11 +114,15 @@ export function Provider() {
                     <VStack className="w-full flex flex-col items-start, justify-start">
                         <Text>Senha</Text>
                     </VStack>
-                    <Inpuut onChangeText={setSenha}/>
+                        <Inpuut onChangeText={setSenha}
+                            RightIcon={<Eye size={32} color="black" weight="fill" style={{marginRight: 12}} />}
+                        />
                     <VStack className="w-full flex flex-col items-start, justify-start">
                         <Text>Confirme sua senha</Text>
                     </VStack>
-                        <Inpuut onChangeText={setConfSenha}/>
+                        <Inpuut onChangeText={setConfSenha}
+                            RightIcon={<Eye size={32} color="black" weight="fill" style={{marginRight: 12}} />}
+                        />
                     </VStack>
                     <Inpuut placeholder="img" onChangeText={setImg} />
 
@@ -134,7 +146,10 @@ export function Provider() {
                             bg='#4D4D4D'
                             onPress={setProvider}
                     />
-                </VStack>
+                    </VStack>
+                    <VStack className="w-full flex flex-col items-start justify-start">
+                        <ButtonBack/>
+                    </VStack>
             </VStack>
             </ScrollView>
         </FormControl>

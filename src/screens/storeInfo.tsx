@@ -17,7 +17,7 @@ interface ServiceProps{
     img: string
 }
 
-export function Store({ servico, Nome, img, ...rest }: ServiceProps) {
+export function Store() {
     
     const [name, setName] = useState('')
     async function StoreServices() {

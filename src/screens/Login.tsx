@@ -1,4 +1,4 @@
-import { VStack, Link } from "native-base";
+import { VStack, Link, Text } from "native-base";
 import { Buttoon } from "../components/Button";
 import { Header } from "../components/header";
 import { Inpuut } from "../components/input";
@@ -6,6 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from "react";
 import { api } from "../../lib/axios";
+import { LockKey, User } from "phosphor-react-native";
+import { ButtonBack } from "../components/buttonBack";
 
 interface DataProps{
     Senha: string
@@ -62,14 +64,8 @@ export function Login() {
                 .then(function (response) {
                 getResponseData(response.data.userInfo)
                 })
-            data.map(e => {
-                if (e.Senha != pass) {
-                    alert('Email ou senha incorretos')
-                } else {
-                    navigation.navigate('change')
-                }
-            })
         } catch (error) {
+            
             console.error(error)
             throw error
        }
@@ -83,15 +79,40 @@ export function Login() {
                 />
             </VStack>
             <VStack className="w-full h-full flex flex-col items-center justify-center gap-y-8">
+            <VStack className="w-full flex flex-col items-start justify-start ml-4">
+                <Text className="text-LabelColor font-bold text-4xl">Conta IBeauty</Text>
+            </VStack>
                 <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
+                    <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
+                        <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
+                        {data.map(e => {
+                            if (e.Senha != pass) {
+                                return (
+                                    <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
+                                )
+                            }
+                        })}
+                    </VStack>
                     <Inpuut width={'96'} height={'16'} placeholder='Email'
+                        leftElement={<User size={32} color="black" weight="fill" />}
                     className="placeholder:font-bold placeholder:text-2xl"
                     onChangeText={getEmail}
                     />
                 </VStack>
 
                 <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
+                    <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
+                        <Text className="text-LabelColor text-xl font-semibold">Senha:</Text>
+                        {data.map(e => {
+                            if (e.Senha != pass) {
+                                return (
+                                    <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
+                                )
+                            }
+                        })}
+                    </VStack>
                     <Inpuut width={'96'} height={'16'} placeholder='Senha'
+                        leftElement={<LockKey size={32} color="black" weight="fill" />}
                     className="placeholder:font-bold placeholder:text-2xl"
                     onChangeText={getPass}
                     type="password"
@@ -110,6 +131,9 @@ export function Login() {
                         className="w-96 text-center"
                         onPress={SetLogin}
                     />
+                </VStack>
+                <VStack className='w-full flex flex-col items-start justify-start'>
+                    <ButtonBack/>
                 </VStack>
             </VStack>
         </VStack>

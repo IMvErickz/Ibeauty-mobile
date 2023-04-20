@@ -1,15 +1,13 @@
-import { Image, VStack } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
+import { Button, Image, VStack } from 'native-base'
+import { ArrowFatLeft } from 'phosphor-react-native'
 import * as React from "react"
 
 export function ButtonBack() {
+    const navigation = useNavigation()
     return (
-      <Image
-        source={{
-                uri: "../../assets/Botaovoltar.png"
-            }}
-            alt="Alternate Text" size="xl"
-        /> 
-      
-        
-    )
+            <Button className='bg-transparent' onPress={() => navigation.goBack()}>
+                <ArrowFatLeft size={32} color="#6A8E86" weight="fill" />
+            </Button>
+        )
 }

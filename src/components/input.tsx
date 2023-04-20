@@ -2,9 +2,11 @@ import { Input, IInputProps } from 'native-base'
 
 interface InputProps extends IInputProps {
     placeholder?: string
+    RightIcon?: JSX.Element
+    LeftIcon?: JSX.Element
 }
 
-export function Inpuut({placeholder, ...rest}: InputProps) {
+export function Inpuut({placeholder, RightIcon, LeftIcon, ...rest}: InputProps) {
     return (
         <Input
             placeholder={placeholder}
@@ -12,6 +14,8 @@ export function Inpuut({placeholder, ...rest}: InputProps) {
             borderWidth='0'
             color={'black'}
             {...rest}
+            InputLeftElement={LeftIcon}
+            InputRightElement={RightIcon}
         />
     )
 }
