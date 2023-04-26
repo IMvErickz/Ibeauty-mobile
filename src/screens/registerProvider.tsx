@@ -9,7 +9,6 @@ import { Selection } from "../components/Select";
 import { ArrowFatLeft, Eye, IconProps } from "phosphor-react-native";
 import {useNavigation} from '@react-navigation/native'
 import { ButtonBack } from "../components/buttonBack";
-import { Icon } from '@iconify/react';
 
 export function Provider() {
 
@@ -43,6 +42,8 @@ export function Provider() {
                     cep, 
                     numero
                 })
+
+                navigation.navigate('auth')
             }
         } catch (error) {
             console.log(error)

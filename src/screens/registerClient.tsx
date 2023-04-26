@@ -4,8 +4,41 @@ import { Header } from '../components/header'
 import { Inpuut } from '../components/input'
 import { Eye } from 'phosphor-react-native'
 import { ButtonBack } from '../components/buttonBack'
+import { useState } from 'react'
+import { api } from '../../lib/axios'
+import { useNavigation } from '@react-navigation/native'
 
-export function Client(){
+export function Client() {
+
+    const navigation = useNavigation()
+
+    const [Nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [CPF, setCPF] = useState('')
+    const [Senha, setSenha] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [dateBirth, setDate]= useState('')
+    
+    async function Register() {
+        
+        try {
+            const client = await api.post('/user/register', {
+                CPF,
+                Nome,
+                email,
+                Senha,
+                telefone,
+                dateBirth,
+                cep: "12922-341",
+                numero: "669"
+            })
+
+            navigation.navigate('auth')
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    }
     return (
         <FormControl>
             <ScrollView>
@@ -22,7 +55,8 @@ export function Client(){
                 <Inpuut
                             width={'190'}
                             marginRight={'4'}
-                    placeholder='Nome'
+                            placeholder='Nome'
+                            onChangeText={setNome}
                 />
                 
                 <Inpuut
@@ -35,12 +69,14 @@ export function Client(){
                 <Inpuut
                             width={'190'}
                             marginRight={'4'}
-                    placeholder='Telefone (opcional)'
+                            placeholder='Telefone (opcional)'
+                            onChangeText={setTelefone}
                 />
                 
                 <Inpuut
                     width={'190'}
-                    placeholder='Data de nascimento'
+                            placeholder='Data de nascimento'
+                            onChangeText={setDate}
                 />
             </VStack>
 
@@ -50,9 +86,14 @@ export function Client(){
 
             <VStack flex={1} justifyContent='center' alignItems={'center'} className='flex flex-col items-center justify-center w-full'>
                 <VStack className='w-full flex flex-col items-start justify-start'>
+                    <Text className="text-black opacity-75 text-2xl">CPF</Text>
+                </VStack>
+                        <Inpuut width={'381'} onChangeText={setCPF} />
+
+                <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Email</Text>
                 </VStack>
-                <Inpuut width={'381'} />
+                        <Inpuut width={'381'} onChangeText={setEmail} />
                 
                 <VStack className='w-full flex flex-col items-start justify-start'>
                     <Text className="text-black opacity-75 text-2xl">Confirme seu Email</Text>
@@ -63,7 +104,8 @@ export function Client(){
                     <Text className="text-black opacity-75 text-2xl">Senha</Text>
                 </VStack>
                         <Inpuut width={'381'}
-                        RightIcon={<Eye size={32} color="black" weight="fill" style={{marginRight: 12}} />}
+                            RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
+                            onChangeText={setSenha}
                         />
                 
                 <VStack className='w-full flex flex-col items-start justify-start'>
@@ -92,6 +134,7 @@ export function Client(){
                         tittle='Finalizar Cadastro'
                             bg='#4D4D4D'
                             width={'341'}
+                            onPress={Register}
                 />
                     </VStack>
                     <VStack className='w-full flex flex-col items-start justify-start'>
