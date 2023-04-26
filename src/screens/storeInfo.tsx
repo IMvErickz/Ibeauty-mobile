@@ -23,7 +23,7 @@ export function Store() {
     async function StoreServices() {
      let nameLocal = await AsyncStorage.getItem('StoreName')
         setName(nameLocal as string)
-        //console.log(name)
+        console.log(name)
     }
 
     const {data} = useQuery<ServiceProps[]>('ServiceProvider', async () => {
@@ -44,7 +44,7 @@ export function Store() {
                     return (
                         <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-4'>
                             <Text className="font-bold text-xl">{e.Nome}</Text>
-                            <Image source={{ uri: "https://marciatravessoni.com.br/wp-content/uploads/2021/09/Ida-Axenstedt-1.jpg" }}
+                            <Image source={{ uri: e.img }}
                                 alt="Imagem não encontrada"
                                 size="lg"
                                 className="rounded-full static" />

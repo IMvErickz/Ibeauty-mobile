@@ -6,6 +6,8 @@ export declare global{
             auth: undefined
             store: undefined
             change: undefined
+            initial: undefined
+            NewProduct: undefined
         }
     }
 }

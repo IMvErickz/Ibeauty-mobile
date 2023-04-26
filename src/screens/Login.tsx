@@ -64,6 +64,8 @@ export function Login() {
                 .then(function (response) {
                 getResponseData(response.data.userInfo)
                 })
+            
+            navigation.navigate('change')
         } catch (error) {
             
             console.error(error)
