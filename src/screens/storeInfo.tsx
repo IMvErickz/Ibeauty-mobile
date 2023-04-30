@@ -1,4 +1,4 @@
-import { Text, VStack, ScrollView, Image, Button } from "native-base";
+import { Text, VStack, ScrollView, Image } from "native-base";
 import { Header } from "../components/header";
 import { CardProducts } from '../components/cardProductsServices.tsx'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 interface SericoProps{
     NomeServico: string
     img: string
+    id: string
 }
 
 interface ServiceProps{
@@ -19,17 +20,17 @@ interface ServiceProps{
 
 export function Store() {
     
-    const [name, setName] = useState('')
+    const [id, setName] = useState('')
     async function StoreServices() {
-     let nameLocal = await AsyncStorage.getItem('StoreName')
-        setName(nameLocal as string)
+     let idStore = await AsyncStorage.getItem('Storeid')
+        setName(idStore as string)
         //console.log(name)
     }
 
     StoreServices()
 
     const {data} = useQuery<ServiceProps[]>('ServiceProvider', async () => {
-        const response = await api.get(`/services/${name}`)
+        const response = await api.get(`/services/${id}`)
 
         return response.data.services
     })
@@ -44,16 +45,18 @@ export function Store() {
                 </VStack>
                 {data?.map(e => {
                     return (
-                        <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-4' key={e.Nome}>
-                            <Text className="font-bold text-xl">{e.Nome}</Text>
+                        <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-16' key={e.Nome}>
                             <Image source={{ uri: e.img }}
                                 alt="Imagem não encontrada"
                                 size="lg"
                                 className="rounded-full static" />
-                        </VStack><VStack className="w-full flex flex-col items-center justify-center">
+                            <Text className="font-bold text-xl">{e.Nome}</Text>
+                            </VStack>
+                            <VStack className="w-full flex flex-col items-center justify-center">
                                 {e.servico.map(e => {
                                     return (
                                         <CardProducts
+                                            id={e.id}
                                     Name={e.NomeServico}
                                     img={e.img} />
                                     )

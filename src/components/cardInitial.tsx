@@ -13,8 +13,8 @@ export function CardInitial(props: CardProps) {
     const navigation = useNavigation()
 
      async function SetStoreName() {
-        let nameStore =  AsyncStorage.setItem('StoreName', props.CNPJ)
-        alert(props.CNPJ)
+        let nameStore =  AsyncStorage.setItem('Storeid', props.CNPJ)
+        //alert(props.CNPJ)
     }
     return (
         <Button className="w-full bg-white border-none" onPressIn={SetStoreName} onPress={() => {navigation.navigate('store')}}>

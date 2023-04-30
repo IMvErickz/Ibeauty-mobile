@@ -8,6 +8,8 @@ export declare global{
             change: undefined
             initial: undefined
             NewProduct: undefined
+            Schedule: undefined
+            Hours: undefined
         }
     }
 }

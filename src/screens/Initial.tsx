@@ -20,6 +20,7 @@ interface ProductsProps{
 interface SericoProps{
     NomeServico: string
     img: string
+    id: string
 }
 
 interface ServiceProps{
@@ -94,6 +95,7 @@ export function Initial() {
                                 {e.servico.map(e => {
                                     return (
                                         <CardProducts
+                                            id={e.id}
                                     Name={e.NomeServico}
                                     img={e.img} />
                                     )

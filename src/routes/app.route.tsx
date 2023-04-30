@@ -10,6 +10,8 @@ import { Login } from '../screens/Login';
 import { Store } from '../screens/storeInfo'; 
 import { HomeChange } from '../screens/HomeClient';
 import { NewProduct } from '../screens/RegisterProduct';
+import { Schedule } from '../screens/Schedule';
+import { Hours } from '../screens/Hours';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -24,7 +26,9 @@ export function AppRoutes() {
             <Screen name='store' component={Store} options={{ headerShown: false }} />
             <Screen name="change" component={HomeChange} options={{ headerShown: false }} />
             <Screen name="initial" component={Initial} options={{ headerShown: false }} />
-            <Screen name="NewProduct" component={NewProduct} options={{headerShown: false}}/>
+            <Screen name="NewProduct" component={NewProduct} options={{ headerShown: false }} />
+            <Screen name="Schedule" component={Schedule} options={{ headerShown: false }} />
+            <Screen name="Hours" component={Hours} options={{headerShown: false}}/>
         </Navigator>
     )
 }
