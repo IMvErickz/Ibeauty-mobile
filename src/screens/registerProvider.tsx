@@ -1,4 +1,4 @@
-import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button  } from "native-base";
+import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button, Select, CheckIcon  } from "native-base";
 import { FormEvent, useState, } from "react";
 import {TextInput} from 'react-native'
 import { api } from "../../lib/axios";
@@ -95,7 +95,19 @@ export function Provider() {
                 </VStack>
                 
                 <VStack className="w-full flex flex-col items-center justify-center p-5">
-                    <Selection/>
+                    <Select backgroundColor={'#D9D9D9'}
+                        accessibilityLabel="Selecione a categoria"
+                        placeholder="Selecione a categoria"
+                        borderWidth={0}
+                        width={'full'}
+                        _selectedItem={{
+                    bg: "teal.600",
+                    endIcon: <CheckIcon size={8} />
+                }} mt="1">
+                                 
+                       <Select.Item label="oi" value="oi" />
+                      
+                    </Select>
                 </VStack>
                 
                 <VStack className=' w-full flex flex-col items-start justify-start'>

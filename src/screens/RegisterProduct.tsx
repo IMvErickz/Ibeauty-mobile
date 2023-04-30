@@ -1,26 +1,64 @@
-import { Text, VStack, ScrollView, Image, Button, FormControl, Input } from "native-base";
+import { Text, VStack, ScrollView, Image, Button, FormControl, Input, Select, CheckIcon } from "native-base";
 import { Header } from "../components/header";
 import { Buttoon } from "../components/Button";
 import { Inpuut } from "../components/input";
 import { ButtonBack } from "../components/buttonBack";
 import { api } from "../../lib/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from 'react-query'
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+interface SelectionProps{
+    nomeCategoria: string
+    id: string
+}
 
 export function NewProduct() {
+
+    const navigation = useNavigation()
+    
+    const [id, getId] = useState('')
+        async function StoreServices() {
+        let nameLocal = await AsyncStorage.getItem('StoreName')
+            getId(nameLocal as string)
+    }
+
+    const {data} = useQuery<SelectionProps[]>('Category', async () => {
+        const response = await api.get('/categorys')
+
+        return response.data.getCategory
+    })
 
     const [NomeServico, setName] = useState('')
     const [preco, setPrice] = useState('')
     const [descricao, setDesc] = useState('')
     const [img, setImg] = useState('')
+    const [category, getCategory] = useState('')
+
+    useEffect(() => {
+        setImg('https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png')
+     }, [])
 
     async function ProductOrService() {
-        const product = await api.post('/service/register', {
-            NomeServico,
-            preco,
-            descricao,
-            img
-        })
+        try {
+            const product = await api.post('/service/register', {
+                NomeServico,
+                preco,
+                descricao,
+                img,
+                category,
+                CNPJ: id
+            })
+
+            navigation.navigate('initial')
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
     }
+
+    StoreServices()
 
     return (
         <FormControl>
@@ -49,8 +87,8 @@ export function NewProduct() {
                         <Image
                             alt='Imagem não encontrada'
                             source={{
-                            uri: 'https://static1.fiquediva.com.br/articles/0/20/13/0/@/157497-veja-18-fotos-de-inspiracao-do-cabelo-ca-article_gallery_portrait-9.jpg'
-                            }} />
+                            uri: "https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png"
+                          }} />
                         
                         <Button className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
                         <Input className="hidden" onChangeText={setImg}/>
@@ -79,19 +117,29 @@ export function NewProduct() {
                                     backgroundColor={'#F1F1F1'}
                                     className="bg-borderColor"
                                     onChangeText={setPrice}
+                                    keyboardType="number-pad"
                             />
-                            </VStack>
+                            </VStack> 
                         </VStack>
 
                         <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Tipo de Serviço:</Text>
                             <VStack className='w-full flex flex-col items-center justify-center '>
-                            <Inpuut
+                            <Select backgroundColor={'#D9D9D9'}
+                                    accessibilityLabel="Selecione a categoria"
+                                    placeholder="Selecione a categoria"
+                                    borderWidth={0}
                                     width={'341'}
-                                    marginRight={'4'}
-                                    backgroundColor={'#F1F1F1'}
-                                    className="bg-borderColor"
-                            />
+                                    _selectedItem={{
+                                bg: "teal.600",
+                                endIcon: <CheckIcon size={8}/>
+                            }} mt="1" onValueChange={(itemValue: any) => getCategory(itemValue)}>
+                                        {data?.map(e => {
+                                            return (
+                                                <Select.Item label={e.nomeCategoria} value={e.id}/>
+                                        )
+                                    })}
+                                </Select>
                             </VStack>
                         </VStack>
 
@@ -110,8 +158,10 @@ export function NewProduct() {
                         </VStack>
 
                         <VStack className="w-full flex flex-col items-center justify-center gap-y-4">
-                            <Button className='bg-boldColor w-80'><Text className='font-bold text-lg text-white'>Salvar Alterações</Text></Button>
-                            <Button className='bg-[#D14747A3] w-80'><Text className='font-bold text-lg text-white'>Descartar</Text></Button>
+                            <Button onPress={ProductOrService} className='bg-boldColor w-80'><Text className='font-bold text-lg text-white'>Salvar Alterações</Text></Button>
+                            <Button className='bg-[#D14747A3] w-80'>
+                                <Text className='font-bold text-lg text-white' onPress={() => navigation.goBack()}>Descartar</Text>
+                            </Button>
                         </VStack>
                     </VStack>
                 </VStack>

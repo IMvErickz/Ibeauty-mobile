@@ -11,6 +11,8 @@ import { ButtonBack } from "../components/buttonBack";
 
 interface DataProps{
     Senha: string
+    CPF: string
+    CNPJ: string
 }
 
 export function Login() {
@@ -65,7 +67,17 @@ export function Login() {
                 getResponseData(response.data.userInfo)
                 })
             
-            navigation.navigate('change')
+            data.map(async e => {
+                if (tittle == "Cliente") {
+                    await AsyncStorage.setItem('ClientId', e.CPF)
+                    navigation.navigate('change')
+                } else {
+                    await AsyncStorage.setItem('ProviderId', e.CNPJ)
+                    navigation.navigate('change')
+                }
+            })
+            
+            
         } catch (error) {
             
             console.error(error)

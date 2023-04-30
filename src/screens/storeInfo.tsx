@@ -23,8 +23,10 @@ export function Store() {
     async function StoreServices() {
      let nameLocal = await AsyncStorage.getItem('StoreName')
         setName(nameLocal as string)
-        console.log(name)
+        //console.log(name)
     }
+
+    StoreServices()
 
     const {data} = useQuery<ServiceProps[]>('ServiceProvider', async () => {
         const response = await api.get(`/services/${name}`)
@@ -32,17 +34,17 @@ export function Store() {
         return response.data.services
     })
     
-    StoreServices()
+    
     
     return (
         <ScrollView bg='white'>
-            <VStack w={'full'} h={'full'} backgroundColor={'white'}>
+            <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
                 <VStack w="full" alignItems={"center"} justifyContent={'center'}>
                     <Header/>
                 </VStack>
                 {data?.map(e => {
                     return (
-                        <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-4'>
+                        <><VStack w={'full'} className='flex flex-row items-center justify-center gap-x-4' key={e.Nome}>
                             <Text className="font-bold text-xl">{e.Nome}</Text>
                             <Image source={{ uri: e.img }}
                                 alt="Imagem não encontrada"
