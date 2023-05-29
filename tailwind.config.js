@@ -13,7 +13,8 @@ module.exports = {
         'bgInput': "#F1F1F1",
         'bgLight': '#E5E5E5',
         'borderColor': '#D9D9D9',
-        'LabelColor': '#416058'
+        'LabelColor': '#416058',
+        'red-20': "#D14747A3"
       }
     },
   },

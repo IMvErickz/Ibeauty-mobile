@@ -2,8 +2,40 @@ import { VStack, Text, ScrollView, Button } from "native-base";
 import { Header } from "../components/header";
 import { ButtonBack } from "../components/buttonBack";
 import { useNavigation } from "@react-navigation/native";
+import { ScheduleDay } from "../components/scheduleDay";
+import { useQuery } from "react-query";
+import { api } from "../../lib/axios";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+interface daysProps {
+    id: string
+    day: string
+}
+
+interface scheduleProps {
+    id: string
+    day: string
+    ScheduleDay: daysProps[]
+}
 
 export function Schedule() {
+
+    const [id, getId] = useState('')
+
+    async function GetId() {
+        let id = await AsyncStorage.getItem('ProviderId')
+        getId(id as string)
+    }
+    GetId()
+
+    const { data } = useQuery<scheduleProps[]>('Days', async () => {
+        const response = await api.get(`/schedule/${id}`)
+
+        return response.data.day
+    })
+
+    data?.map(e => e.ScheduleDay.map(e => console.log(e.day, e.id)))
 
     const navigation = useNavigation()
 
@@ -12,30 +44,26 @@ export function Schedule() {
             <VStack w='100%' h='100%' justifyContent={'center'} alignItems={'center'} display={'flex'}>
                 <VStack className='w-full flex flex-col items-center justify-center'>
                     <Header
-                    ButtonBack={<ButtonBack/>}
+                        ButtonBack={<ButtonBack />}
                     />
                 </VStack>
-                <VStack className="w-full flex flex-col items-center justify-center gap-y-8">
-                    <VStack className="w-full flex flex-col items-start justify-start ml-8 gap-y-8">
-                        <Text className='text-lg font-semibold'>Selecione um dia disponivel na agenda:</Text>
-                        <Text className='text-lg font-semibold'>Junho, 2022</Text>
-                    </VStack>
-                    <VStack className="w-full flex flex-col items-end justify-end">
-                        <VStack className="w-full flex flex-row items-start justify-start border-t-2 border-b-2 border-t-borderColor border-b-borderColor gap-x-8 p-2">
-                            <VStack className="w-14 h-14 flex flex-col items-center justify-center rounded-lg border-2 border-black">
-                                <VStack className="flex flex-row items-center justify-center gap-x-4">
-                                    <VStack className="w-3 h-3 rounded-full border-2 border-black"></VStack>
-                                    <VStack className="w-3 h-3 rounded-full border-2 border-black"></VStack>
-                                </VStack>
-                                <Text className="text-2xl text-black">1</Text>
-                            </VStack>
-                            <Button className='w-full items-start justify-start bg-transparent' onPress={() => navigation.navigate('Hours')}>
-                                <Text className='hidden'>id</Text>
-                                <Text className="text-lg font-semibold mt-1">Quarta Feira, 1</Text>
-                            </Button>
-                        </VStack>
-                    </VStack>
+                <VStack className='w-full flex items-start p-2'>
+                    <Text className='text-lg font-semibold'>Selecione um dia disponivel na agenda:</Text>
+                    <Text className='text-lg font-semibold'>Junho, 2023</Text>
                 </VStack>
+
+                {data?.map(e => e.ScheduleDay.map(e => {
+                    return (
+                        <ScheduleDay
+                            press={() => navigation.navigate('Hours')}
+                            day="Quarta-Feira"
+                            dayNumber={e.day}
+                            id="as"
+                        />
+                    )
+                }
+                ))}
+
             </VStack>
         </ScrollView>
     )

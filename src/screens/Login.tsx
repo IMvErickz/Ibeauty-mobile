@@ -9,8 +9,8 @@ import { api } from "../../lib/axios";
 import { LockKey, User } from "phosphor-react-native";
 import { ButtonBack } from "../components/buttonBack";
 
-interface DataProps{
-    Senha: string
+interface DataProps {
+    Password: string
     CPF: string
     CNPJ: string
 }
@@ -45,7 +45,7 @@ export function Login() {
         }
     }
     setPageName()
-    
+
     const [route, setRoute] = useState('')
     //console.log(route)
     const [email, getEmail] = useState('')
@@ -64,9 +64,9 @@ export function Login() {
         try {
             const login = await api.get(`/${route}/${email}`)
                 .then(function (response) {
-                getResponseData(response.data.userInfo)
+                    getResponseData(response.data.userInfo)
                 })
-            
+
             data.map(async e => {
                 if (tittle == "Cliente") {
                     await AsyncStorage.setItem('ClientId', e.CPF)
@@ -76,31 +76,31 @@ export function Login() {
                     navigation.navigate('change')
                 }
             })
-            
-            
+
+
         } catch (error) {
-            
+
             console.error(error)
             throw error
-       }
+        }
     }
     return (
         <VStack
             className='bg-white' w="full" h="full" alignItems={'center'}>
             <VStack width={'100%'} alignItems={'center'} justifyContent={'center'} display={'flex'} >
                 <Header
-                text={tittle}
+                    text={tittle}
                 />
             </VStack>
             <VStack className="w-full h-full flex flex-col items-center justify-center gap-y-8">
-            <VStack className="w-full flex flex-col items-start justify-start ml-4">
-                <Text className="text-LabelColor font-bold text-4xl">Conta IBeauty</Text>
-            </VStack>
+                <VStack className="w-full flex flex-col items-start justify-start ml-4">
+                    <Text className="text-LabelColor font-bold text-4xl">Conta IBeauty</Text>
+                </VStack>
                 <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
                     <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
                         {data.map(e => {
-                            if (e.Senha != pass) {
+                            if (e.Password != pass) {
                                 return (
                                     <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
                                 )
@@ -109,8 +109,8 @@ export function Login() {
                     </VStack>
                     <Inpuut width={'96'} height={'16'} placeholder='Email'
                         leftElement={<User size={32} color="black" weight="fill" />}
-                    className="placeholder:font-bold placeholder:text-2xl"
-                    onChangeText={getEmail}
+                        className="placeholder:font-bold placeholder:text-2xl"
+                        onChangeText={getEmail}
                     />
                 </VStack>
 
@@ -118,7 +118,7 @@ export function Login() {
                     <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Senha:</Text>
                         {data.map(e => {
-                            if (e.Senha != pass) {
+                            if (e.Password != pass) {
                                 return (
                                     <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
                                 )
@@ -127,9 +127,9 @@ export function Login() {
                     </VStack>
                     <Inpuut width={'96'} height={'16'} placeholder='Senha'
                         leftElement={<LockKey size={32} color="black" weight="fill" />}
-                    className="placeholder:font-bold placeholder:text-2xl"
-                    onChangeText={getPass}
-                    type="password"
+                        className="placeholder:font-bold placeholder:text-2xl"
+                        onChangeText={getPass}
+                        type="password"
                     />
                 </VStack>
 
@@ -147,7 +147,7 @@ export function Login() {
                     />
                 </VStack>
                 <VStack className='w-full flex flex-col items-start justify-start'>
-                    <ButtonBack/>
+                    <ButtonBack />
                 </VStack>
             </VStack>
         </VStack>

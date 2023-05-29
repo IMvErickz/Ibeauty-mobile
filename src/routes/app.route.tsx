@@ -1,23 +1,21 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Home } from '../screens/Home'
 import { Client } from '../screens/registerClient'
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ListViewBase } from 'react-native';
 import { Provider } from '../screens/registerProvider';
 import { Initial } from '../screens/Initial';
 import { Login } from '../screens/Login';
-import { Store } from '../screens/storeInfo'; 
+import { Store } from '../screens/storeInfo';
 import { HomeChange } from '../screens/HomeClient';
 import { NewProduct } from '../screens/RegisterProduct';
 import { Schedule } from '../screens/Schedule';
 import { Hours } from '../screens/Hours';
+import { Payment } from '../screens/Payment';
 
-const {Navigator, Screen} = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export function AppRoutes() {
     return (
-        
+
         <Navigator>
             <Screen name='/' component={Home} options={{ headerShown: false }} />
             <Screen name='Client' component={Client} options={{ headerShown: false }} />
@@ -28,7 +26,8 @@ export function AppRoutes() {
             <Screen name="initial" component={Initial} options={{ headerShown: false }} />
             <Screen name="NewProduct" component={NewProduct} options={{ headerShown: false }} />
             <Screen name="Schedule" component={Schedule} options={{ headerShown: false }} />
-            <Screen name="Hours" component={Hours} options={{headerShown: false}}/>
+            <Screen name="Hours" component={Hours} options={{ headerShown: false }} />
+            <Screen name='payment' component={Payment} options={{ headerShown: false }} />
         </Navigator>
     )
 }

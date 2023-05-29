@@ -9,49 +9,50 @@ import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-interface SelectionProps{
-    nomeCategoria: string
+interface SelectionProps {
+    NameCategory: string
     id: string
 }
 
 export function NewProduct() {
 
     const navigation = useNavigation()
-    
+
     const [id, getId] = useState('')
-        async function StoreServices() {
-        let nameLocal = await AsyncStorage.getItem('StoreName')
-            getId(nameLocal as string)
+    console.log(id)
+    async function StoreServices() {
+        let nameLocal = await AsyncStorage.getItem('ProviderId')
+        getId(nameLocal as string)
     }
 
-    const {data} = useQuery<SelectionProps[]>('Category', async () => {
+    const { data } = useQuery<SelectionProps[]>('Category', async () => {
         const response = await api.get('/categorys')
 
         return response.data.getCategory
     })
 
-    const [NomeServico, setName] = useState('')
-    const [preco, setPrice] = useState('')
-    const [descricao, setDesc] = useState('')
+    const [NameService, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [description, setDesc] = useState('')
     const [img, setImg] = useState('')
     const [category, getCategory] = useState('')
 
     useEffect(() => {
         setImg('https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png')
-     }, [])
+    }, [])
 
     async function ProductOrService() {
         try {
             const product = await api.post('/service/register', {
-                NomeServico,
-                preco,
-                descricao,
+                NameService,
+                price,
+                description,
                 img,
                 category,
                 CNPJ: id
             })
 
-            navigation.navigate('initial')
+            navigation.goBack()
         } catch (error) {
             console.log(error)
             throw error
@@ -64,12 +65,12 @@ export function NewProduct() {
         <FormControl>
             <ScrollView>
                 <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
-                <VStack w="full" alignItems={"center"} justifyContent={'center'}>
+                    <VStack w="full" alignItems={"center"} justifyContent={'center'}>
                         <Header
                             text="Novo Produto"
-                        ButtonBack={<ButtonBack/>}
+                            ButtonBack={<ButtonBack />}
                         />
-                </VStack>
+                    </VStack>
                     <VStack className='w-full flex flex-col items-start justify-start ml-8 py-8'>
                         <Text className='text-2xl font-semibold'>Adição de produto/serviço</Text>
                     </VStack>
@@ -80,63 +81,63 @@ export function NewProduct() {
                         <Text className='text-black font-semibold text-xl'>Nome do serviço</Text>
                         <Text className='text-black font-semibold text-xl'>valor Cobrado</Text>
                     </VStack>
-                    
+
                     <VStack className='bg-borderColor w-full h-1'><Text className='text-white'>oi</Text></VStack>
 
                     <VStack className='w-full flex flex-row items-center justify-center py-12'>
                         <Image
                             alt='Imagem não encontrada'
                             source={{
-                            uri: "https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png"
-                          }} />
-                        
+                                uri: "https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png"
+                            }} />
+
                         <Button className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
-                        <Input className="hidden" onChangeText={setImg}/>
+                        <Input className="hidden" onChangeText={setImg} />
                     </VStack>
 
                     <VStack className='w-full flex flex-col items-start justify-start gap-y-8'>
                         <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Nome do Serviço:</Text>
                             <VStack className='w-full flex flex-col items-center justify-center '>
-                            <Inpuut
+                                <Inpuut
                                     width={'341'}
                                     marginRight={'4'}
                                     backgroundColor={'#F1F1F1'}
                                     className="bg-borderColor"
                                     onChangeText={setName}
-                            />
+                                />
                             </VStack>
                         </VStack>
 
                         <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Valor a ser cobrado:</Text>
                             <VStack className='w-full flex flex-col items-center justify-center '>
-                            <Inpuut
+                                <Inpuut
                                     width={'341'}
                                     marginRight={'4'}
                                     backgroundColor={'#F1F1F1'}
                                     className="bg-borderColor"
                                     onChangeText={setPrice}
                                     keyboardType="number-pad"
-                            />
-                            </VStack> 
+                                />
+                            </VStack>
                         </VStack>
 
                         <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Tipo de Serviço:</Text>
                             <VStack className='w-full flex flex-col items-center justify-center '>
-                            <Select backgroundColor={'#D9D9D9'}
+                                <Select backgroundColor={'#D9D9D9'}
                                     accessibilityLabel="Selecione a categoria"
                                     placeholder="Selecione a categoria"
                                     borderWidth={0}
                                     width={'341'}
                                     _selectedItem={{
-                                bg: "teal.600",
-                                endIcon: <CheckIcon size={8}/>
-                            }} mt="1" onValueChange={(itemValue: any) => getCategory(itemValue)}>
-                                        {data?.map(e => {
-                                            return (
-                                                <Select.Item label={e.nomeCategoria} value={e.id}/>
+                                        bg: "teal.600",
+                                        endIcon: <CheckIcon size={8} />
+                                    }} mt="1" onValueChange={(itemValue: any) => getCategory(itemValue)}>
+                                    {data?.map(e => {
+                                        return (
+                                            <Select.Item label={e.NameCategory} value={e.id} />
                                         )
                                     })}
                                 </Select>
@@ -146,14 +147,14 @@ export function NewProduct() {
                         <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Descrição do Serviço</Text>
                             <VStack className='w-full flex flex-col items-center justify-center '>
-                            <Inpuut
+                                <Inpuut
                                     width={'341'}
                                     height={'200'}
                                     marginRight={'4'}
                                     backgroundColor={'#F1F1F1'}
                                     className="bg-borderColor"
                                     onChangeText={setDesc}
-                            />
+                                />
                             </VStack>
                         </VStack>
 
@@ -165,7 +166,7 @@ export function NewProduct() {
                         </VStack>
                     </VStack>
                 </VStack>
-        </ScrollView>
+            </ScrollView>
         </FormControl>
     )
 }
