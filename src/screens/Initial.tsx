@@ -1,5 +1,5 @@
 import { Image, Text, VStack, ScrollView } from "native-base";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { api } from "../../lib/axios";
 import { CardInitial } from "../components/cardInitial";
 import { useQuery } from 'react-query'
@@ -33,11 +33,22 @@ export function Initial() {
 
     const navigation = useNavigation()
 
-    const { data: ServicesData } = useQuery<ProductsProps[]>('Services', async () => {
-        const response = await api.get('/provider')
+    const [ServicesData, setDataService] = useState<ProductsProps[]>([])
+    const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
 
-        return response.data.provider
-    })
+
+    // const { data: ServicesData } = useQuery<ProductsProps[]>('Services', async () => {
+    //     const response = await api.get('/provider')
+
+    //     return response.data.provider
+    // })
+
+    const serviceMemory = useMemo(() => {
+        api.get('/provider')
+            .then(function (response) {
+                setDataService(response.data.provider)
+            })
+    }, [])
 
     const [providerID, getProviderID] = useState('')
     async function StoreServices() {
@@ -48,11 +59,18 @@ export function Initial() {
 
     StoreServices()
 
-    const { data: ProviderData } = useQuery<ServiceProps[]>('ServiceProvider', async () => {
-        const response = await api.get(`/services/${providerID}`)
+    // const { data: ProviderData } = useQuery<ServiceProps[]>('ServiceProvider', async () => {
+    //     const response = await api.get(`/services/${providerID}`)
 
-        return response.data.services
-    })
+    //     return response.data.services
+    // })
+
+    const providerDataMemory = useMemo(() => {
+        api.get(`/services/${providerID}`)
+            .then(function (response) {
+                setDataProvider(response.data.services)
+            })
+    }, [])
 
     const [change, getChange] = useState('')
     //alert(change)

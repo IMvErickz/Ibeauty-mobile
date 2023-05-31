@@ -3,9 +3,8 @@ import { Header } from "../components/header";
 import { ButtonBack } from "../components/buttonBack";
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleDay } from "../components/scheduleDay";
-import { useQuery } from "react-query";
 import { api } from "../../lib/axios";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface daysProps {
@@ -29,11 +28,14 @@ export function Schedule() {
     }
     GetId()
 
-    const { data } = useQuery<scheduleProps[]>('Days', async () => {
-        const response = await api.get(`/schedule/${id}`)
+    const [data, setData] = useState<scheduleProps[]>([])
 
-        return response.data.day
-    })
+    const memory = useMemo(async () => {
+        await api.get(`/schedule/${id}`)
+            .then(function (response) {
+                setData(response.data.day)
+            })
+    }, [])
 
     data?.map(e => e.ScheduleDay.map(e => console.log(e.day, e.id)))
 
