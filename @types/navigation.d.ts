@@ -10,6 +10,7 @@ export declare global{
             NewProduct: undefined
             Schedule: undefined
             Hours: undefined
+            pastService: undefined
         }
     }
 }

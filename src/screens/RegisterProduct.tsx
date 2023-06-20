@@ -3,11 +3,13 @@ import { Header } from "../components/header";
 import { Buttoon } from "../components/Button";
 import { Inpuut } from "../components/input";
 import { ButtonBack } from "../components/buttonBack";
+import * as ImagePicker from 'expo-image-picker';
 import { api } from "../../lib/axios";
 import { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 interface SelectionProps {
     NameCategory: string
@@ -15,6 +17,31 @@ interface SelectionProps {
 }
 
 export function NewProduct() {
+
+    const [preview, setPreview] = useState<string>('')
+
+    console.log("URL PREVIEW: ", preview)
+
+    async function openImagePicker() {
+        try {
+            const result: any = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 1,
+            });
+
+            if (result.assets[0]) {
+                setPreview(result.assets[0].uri)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    async function SetImageURL() {
+
+    }
+
+    SetImageURL()
 
     const navigation = useNavigation()
 
@@ -34,20 +61,41 @@ export function NewProduct() {
     const [NameService, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDesc] = useState('')
-    const [img, setImg] = useState('')
     const [category, getCategory] = useState('')
 
-    useEffect(() => {
-        setImg('https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png')
-    }, [])
-
     async function ProductOrService() {
+
+        let coverUrl
+
+        if (preview) {
+            const uploadFormData = new FormData()
+
+            uploadFormData.append('file', {
+                name: 'image.jpeg',
+                type: 'image/jpeg',
+                uri: preview
+            } as any)
+
+            const uploadResponse = await api.post('/upload', uploadFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            coverUrl = uploadResponse.data.fileUrl
+
+            console.log('IMAGE URL: ', coverUrl)
+
+        }
+
+
         try {
+            console.log("COVER URL: ", coverUrl)
             const product = await api.post('/service/register', {
                 NameService,
                 price,
                 description,
-                img,
+                img: coverUrl,
                 category,
                 CNPJ: id
             })
@@ -88,11 +136,11 @@ export function NewProduct() {
                         <Image
                             alt='Imagem não encontrada'
                             source={{
-                                uri: "https://douxclair.com.br/blog/wp-content/uploads/2019/11/CURLY-DICAS-BLOG.png"
+                                uri: preview
                             }} />
 
-                        <Button className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
-                        <Input className="hidden" onChangeText={setImg} />
+                        <Button onPress={openImagePicker} className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
+
                     </VStack>
 
                     <VStack className='w-full flex flex-col items-start justify-start gap-y-8'>

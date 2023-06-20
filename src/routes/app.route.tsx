@@ -29,7 +29,7 @@ export function AppRoutes() {
             <Screen name="Schedule" component={Schedule} options={{ headerShown: false }} />
             <Screen name="Hours" component={Hours} options={{ headerShown: false }} />
             <Screen name='payment' component={Payment} options={{ headerShown: false }} />
-            <Screen name='/' component={PastService} options={{ headerShown: false }} />
+            <Screen name='pastService' component={PastService} options={{ headerShown: false }} />
         </Navigator>
     )
 }

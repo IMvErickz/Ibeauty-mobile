@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 
-function HomeScreen({ navigation }) {
+function HomeScreen(navigation: any) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
@@ -15,7 +15,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function NotificationsScreen({ navigation }) {
+function NotificationsScreen(navigation: any) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.goBack()} title="Go back home" />
@@ -25,7 +25,7 @@ function NotificationsScreen({ navigation }) {
 
 const drawer = createDrawerNavigator();
 
-export  function Drawer() {
+export function Drawer() {
   return (
     <NavigationContainer>
       <drawer.Navigator initialRouteName="Home">

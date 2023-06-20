@@ -36,13 +36,6 @@ export function Initial() {
     const [ServicesData, setDataService] = useState<ProductsProps[]>([])
     const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
 
-
-    // const { data: ServicesData } = useQuery<ProductsProps[]>('Services', async () => {
-    //     const response = await api.get('/provider')
-
-    //     return response.data.provider
-    // })
-
     const serviceMemory = useMemo(() => {
         api.get('/provider')
             .then(function (response) {
@@ -58,12 +51,6 @@ export function Initial() {
     }
 
     StoreServices()
-
-    // const { data: ProviderData } = useQuery<ServiceProps[]>('ServiceProvider', async () => {
-    //     const response = await api.get(`/services/${providerID}`)
-
-    //     return response.data.services
-    // })
 
     const providerDataMemory = useMemo(() => {
         api.get(`/services/${providerID}`)
