@@ -4,12 +4,13 @@ import { api } from "../../lib/axios";
 import { CardInitial } from "../components/cardInitial";
 import { useQuery } from 'react-query'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { NavigationContainer, useLinkTo, useNavigation } from '@react-navigation/native'
 
 import { Header } from "../components/header";
 import { Buttoon } from "../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardProducts } from "../components/cardProductsServices.tsx";
+import { Drawer } from "../components/Drawer";
 
 interface ProductsProps {
     Name: string
@@ -51,6 +52,12 @@ export function Initial() {
     }
 
     StoreServices()
+
+    async function Logout() {
+        await AsyncStorage.removeItem('ClientId')
+            .then(() => navigation.goBack())
+
+    }
 
     const providerDataMemory = useMemo(() => {
         api.get(`/services/${providerID}`)
@@ -112,6 +119,10 @@ export function Initial() {
 
 
                     }
+                    <Buttoon
+                        tittle="Sair"
+                        onPressIn={() => Logout()}
+                    />
                 </VStack>
 
             </VStack>

@@ -62,7 +62,7 @@ export function Login() {
 
     async function SetLogin() {
         try {
-            const login = await api.get(`/${route}/${email}`)
+            await api.get(`/${route}/${email}`)
                 .then(function (response) {
                     getResponseData(response.data.userInfo)
                 })

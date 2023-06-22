@@ -1,6 +1,6 @@
-export declare global{
-    namespace ReactNavigation{
-        interface RootParamList{
+export declare global {
+    namespace ReactNavigation {
+        interface RootParamList {
             Provider: undefined
             Client: undefined
             auth: undefined
@@ -10,7 +10,7 @@ export declare global{
             NewProduct: undefined
             Schedule: undefined
             Hours: undefined
-            pastService: undefined
+            pastService: undefine
         }
     }
 }
