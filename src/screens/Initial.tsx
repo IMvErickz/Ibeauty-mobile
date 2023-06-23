@@ -53,12 +53,6 @@ export function Initial() {
 
     StoreServices()
 
-    async function Logout() {
-        await AsyncStorage.removeItem('ClientId')
-            .then(() => navigation.goBack())
-
-    }
-
     const providerDataMemory = useMemo(() => {
         api.get(`/services/${providerID}`)
             .then(function (response) {
@@ -112,17 +106,13 @@ export function Initial() {
                                                     img={e.img} />
                                             )
                                         })}
-                                        <Buttoon tittle="Adicionar Novo Serviço" onPress={() => navigation.navigate('NewProduct')} />
+                                        <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16" onPress={() => navigation.navigate('NewProduct')} />
                                     </VStack></>
                             )
                         })
 
 
                     }
-                    <Buttoon
-                        tittle="Sair"
-                        onPressIn={() => Logout()}
-                    />
                 </VStack>
 
             </VStack>
