@@ -13,7 +13,7 @@ import { Payment } from '../screens/Payment';
 import { PastService } from '../screens/pastServices';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Drawer } from '../components/Drawer';
+import { SideBar } from '../screens/Sidebar';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -21,7 +21,7 @@ export function AppRoutes() {
     return (
 
         <Navigator>
-            <Screen name='/' component={Home} options={{ headerShown: false }} />
+            <Screen name='psplash' component={Home} options={{ headerShown: false }} />
             <Screen name='Client' component={Client} options={{ headerShown: false }} />
             <Screen name='Provider' component={Provider} options={{ headerShown: false }} />
             <Screen name='auth' component={Login} options={{ headerShown: false }} />
@@ -32,6 +32,7 @@ export function AppRoutes() {
             <Screen name="Schedule" component={Schedule} options={{ headerShown: false }} />
             <Screen name="Hours" component={Hours} options={{ headerShown: false }} />
             <Screen name='payment' component={Payment} options={{ headerShown: false }} />
+            <Screen name='sidebar' component={SideBar} options={{ headerShown: false }} />
             <Screen name='pastService' component={PastService} options={{ headerShown: false }} />
         </Navigator>
     )

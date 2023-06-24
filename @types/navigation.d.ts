@@ -11,6 +11,8 @@ export declare global {
             Schedule: undefined
             Hours: undefined
             pastService: undefine
+            sidebar: undefined
+            psplash: undefined
         }
     }
 }

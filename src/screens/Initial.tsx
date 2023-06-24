@@ -1,4 +1,4 @@
-import { Image, Text, VStack, ScrollView } from "native-base";
+import { Image, Text, VStack, ScrollView, Button } from "native-base";
 import { useEffect, useState, useMemo } from "react";
 import { api } from "../../lib/axios";
 import { CardInitial } from "../components/cardInitial";
@@ -11,6 +11,7 @@ import { Buttoon } from "../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardProducts } from "../components/cardProductsServices.tsx";
 import { Drawer } from "../components/Drawer";
+import { List } from "phosphor-react-native";
 
 interface ProductsProps {
     Name: string
@@ -36,9 +37,17 @@ export function Initial() {
 
     const [ServicesData, setDataService] = useState<ProductsProps[]>([])
     const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
+    const [drawer, setDrawer] = useState('none')
 
-    const serviceMemory = useMemo(() => {
-        api.get('/provider')
+    function openSideBar() {
+        setDrawer('flex')
+        console.log(drawer)
+    }
+
+    useEffect(() => { openSideBar }, [drawer])
+
+    const serviceMemory = useMemo(async () => {
+        await api.get('/provider')
             .then(function (response) {
                 setDataService(response.data.provider)
             })
@@ -53,8 +62,8 @@ export function Initial() {
 
     StoreServices()
 
-    const providerDataMemory = useMemo(() => {
-        api.get(`/services/${providerID}`)
+    const providerDataMemory = useMemo(async () => {
+        await api.get(`/services/${providerID}`)
             .then(function (response) {
                 setDataProvider(response.data.services)
             })
@@ -69,13 +78,20 @@ export function Initial() {
 
     Change()
 
+
+
     return (
-        <ScrollView>
-            <VStack w="100%" h="100%" alignItems={"center"} justifyContent={'center'}>
+        <ScrollView bg='white'>
+            <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
                 <VStack w="full" alignItems={"center"} justifyContent={'center'}>
-                    <Header />
+                    <Header List={<Button className="bg-transparent" onPress={() => navigation.navigate('sidebar')}>
+                        <List size={32} color="#416058" weight="fill" />
+                    </Button>} />
                 </VStack>
-                <VStack w="full" h="full" alignItems={'center'} justifyContent="center" display={'flex'} flexDirection="column" className="p-2" bg={'white'}>
+                <VStack className="w-full">
+                    <Drawer open={drawer} />
+                </VStack>
+                <VStack w="full" alignItems={'center'} justifyContent="center" display={'flex'} flexDirection="column" className="py-8" bg={'white'}>
                     {change == "Cliente" ?
                         ServicesData?.map(e => {
                             return (
