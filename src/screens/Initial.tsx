@@ -55,7 +55,7 @@ export function Initial() {
 
     const [providerID, getProviderID] = useState('')
     async function StoreServices() {
-        let id = await AsyncStorage.getItem('ProviderId')
+        const id = await AsyncStorage.getItem('ProviderId')
         getProviderID(id as string)
         //console.log(name)
     }
@@ -67,7 +67,7 @@ export function Initial() {
             .then(function (response) {
                 setDataProvider(response.data.services)
             })
-    }, [])
+    }, [providerID])
 
     const [change, getChange] = useState('')
     //alert(change)

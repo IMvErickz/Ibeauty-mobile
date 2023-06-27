@@ -18,7 +18,7 @@ interface SelectionProps {
 
 export function NewProduct() {
 
-    const [preview, setPreview] = useState<string>('')
+    const [preview, setPreview] = useState('')
 
     console.log("URL PREVIEW: ", preview)
 
