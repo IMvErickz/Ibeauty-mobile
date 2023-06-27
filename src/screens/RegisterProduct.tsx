@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import sizes from "native-base/lib/typescript/theme/base/sizes";
 
 
 interface SelectionProps {
@@ -36,12 +37,6 @@ export function NewProduct() {
             console.error(err)
         }
     }
-
-    async function SetImageURL() {
-
-    }
-
-    SetImageURL()
 
     const navigation = useNavigation()
 
@@ -71,8 +66,8 @@ export function NewProduct() {
             const uploadFormData = new FormData()
 
             uploadFormData.append('file', {
-                name: 'image.jpeg',
-                type: 'image/jpeg',
+                name: 'image.jpg',
+                type: 'image/jpg',
                 uri: preview
             } as any)
 
@@ -90,7 +85,6 @@ export function NewProduct() {
 
 
         try {
-            console.log("COVER URL: ", coverUrl)
             const product = await api.post('/service/register', {
                 NameService,
                 price,
@@ -132,12 +126,14 @@ export function NewProduct() {
 
                     <VStack className='bg-borderColor w-full h-1'><Text className='text-white'>oi</Text></VStack>
 
-                    <VStack className='w-full flex flex-row items-center justify-center py-12'>
+                    <VStack className='w-full flex flex-row items-center justify-center py-12 gap-x-4'>
                         <Image
                             alt='Imagem não encontrada'
                             source={{
                                 uri: preview
-                            }} />
+                            }}
+                            size={24}
+                        />
 
                         <Button onPress={openImagePicker} className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
 

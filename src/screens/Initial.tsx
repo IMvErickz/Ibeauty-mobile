@@ -78,6 +78,12 @@ export function Initial() {
 
     Change()
 
+    async function con() {
+        ProviderData.map(e => e.Service.map(img => console.log(img.img)))
+    }
+
+    con()
+
 
 
     return (
@@ -114,12 +120,12 @@ export function Initial() {
                                         size="lg"
                                         className="rounded-full static" />
                                 </VStack><VStack className="w-full flex flex-col items-center justify-center">
-                                        {e.Service.map((e: any) => {
+                                        {e.Service.map((service: any) => {
                                             return (
                                                 <CardProducts
-                                                    id={e.id}
-                                                    Name={e.NameService}
-                                                    img={e.img} />
+                                                    id={service.id}
+                                                    Name={service.NameService}
+                                                    img={service.img} />
                                             )
                                         })}
                                         <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16" onPress={() => navigation.navigate('NewProduct')} />
