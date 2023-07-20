@@ -23,6 +23,7 @@ interface SericoProps {
     NameService: string
     img: string
     id: string
+    price: string
 }
 
 interface ServiceProps {
@@ -78,11 +79,7 @@ export function Initial() {
 
     Change()
 
-    async function con() {
-        ProviderData.map(e => e.Service.map(img => console.log(img.img)))
-    }
-
-    con()
+    ProviderData.map(e => e.Service.map(el => console.log(el.img)))
 
 
 
@@ -120,12 +117,14 @@ export function Initial() {
                                         size="lg"
                                         className="rounded-full static" />
                                 </VStack><VStack className="w-full flex flex-col items-center justify-center">
-                                        {e.Service.map((service: any) => {
+                                        {e.Service.map(service => {
                                             return (
                                                 <CardProducts
                                                     id={service.id}
                                                     Name={service.NameService}
-                                                    img={service.img} />
+                                                    img={service.img}
+                                                    Price={service.price}
+                                                />
                                             )
                                         })}
                                         <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16" onPress={() => navigation.navigate('NewProduct')} />

@@ -66,8 +66,8 @@ export function NewProduct() {
             const uploadFormData = new FormData()
 
             uploadFormData.append('file', {
-                name: 'image.jpg',
-                type: 'image/jpg',
+                name: 'image.jpeg',
+                type: 'image/jpeg',
                 uri: preview
             } as any)
 

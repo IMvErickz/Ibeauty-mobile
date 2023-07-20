@@ -7,12 +7,12 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <StatusBar
-        barStyle="light-content"
+        barStyle="dark-content"
         backgroundColor="transparent"
         translucent
       />
 
-      <Routes/>
+      <Routes />
     </NativeBaseProvider>
   );
 }
