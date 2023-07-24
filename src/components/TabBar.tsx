@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MapPin, Notepad, Storefront, CalendarBlank } from "phosphor-react-native"
 //import LocalIncon from "../styles/LocalIncon"
-import { Initial } from "./Initial"
-import { Store } from "./storeInfo"
+import { Initial } from "../screens/Home/Initial"
+import { Store } from "../screens/Services/storeInfo"
 import { useState } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-export function HomeChange() {
+export function TabBar() {
     const { Navigator, Screen } = createBottomTabNavigator()
 
     const [localType, setLocalType] = useState('')

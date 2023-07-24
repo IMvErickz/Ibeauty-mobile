@@ -1,11 +1,11 @@
 import { Text, VStack, ScrollView, FormControl, Checkbox } from 'native-base'
-import { Buttoon } from '../components/Button'
-import { Header } from '../components/header'
-import { Inpuut } from '../components/input'
+import { Buttoon } from '../../components/Buttons/Button'
+import { Header } from '../../components/header'
+import { Inpuut } from '../../components/Input/input'
 import { Eye } from 'phosphor-react-native'
-import { ButtonBack } from '../components/buttonBack'
+import { ButtonBack } from '../../components/Buttons/buttonBack'
 import { useState } from 'react'
-import { api } from '../../lib/axios'
+import { api } from '../../../lib/axios'
 import { useNavigation } from '@react-navigation/native'
 
 export function Client() {

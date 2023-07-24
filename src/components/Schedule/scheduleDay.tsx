@@ -1,5 +1,5 @@
 import { VStack, Text, Button } from "native-base";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 
 interface DayProps {
     press?: () => void

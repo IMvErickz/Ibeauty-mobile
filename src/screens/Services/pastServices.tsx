@@ -1,7 +1,7 @@
 import { VStack, Text, Image, ScrollView, Button } from "native-base";
-import { Header } from "../components/header";
-import { CardProducts } from "../components/cardProductsServices.tsx";
-import { Payments } from "../components/Payments";
+import { Header } from "../../components/header";
+import { CardProducts } from "../../components/cardProductsServices.tsx";
+import { Payments } from "../../components/payment/Payments";
 import { Money } from "phosphor-react-native";
 import { useState } from "react";
 
@@ -31,6 +31,7 @@ export function PastService() {
                             Name="Servico"
                             img="https://marciatravessoni.com.br/wp-content/uploads/2021/09/Ida-Axenstedt-1.jpg"
                             id='123'
+                            Price="20"
                         />
                     </VStack>
 

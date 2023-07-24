@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Drawer } from "../components/Drawer";
+import { Drawer } from "./Drawer";
 import { useNavigation } from "@react-navigation/native";
 import { VStack } from "native-base";
 

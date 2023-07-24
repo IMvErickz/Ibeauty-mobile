@@ -1,10 +1,10 @@
 import { Text, VStack, ScrollView, Image, Button, FormControl, Input, Select, CheckIcon } from "native-base";
-import { Header } from "../components/header";
-import { Buttoon } from "../components/Button";
-import { Inpuut } from "../components/input";
-import { ButtonBack } from "../components/buttonBack";
+import { Header } from "../../components/header";
+import { Buttoon } from "../../components/Buttons/Button";
+import { Inpuut } from "../../components/Input/input";
+import { ButtonBack } from "../../components/Buttons/buttonBack";
 import * as ImagePicker from 'expo-image-picker';
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 import { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";

@@ -1,13 +1,13 @@
 import { VStack, Link, Text } from "native-base";
-import { Buttoon } from "../components/Button";
-import { Header } from "../components/header";
-import { Inpuut } from "../components/input";
+import { Buttoon } from "../../components/Buttons/Button";
+import { Header } from "../../components/header";
+import { Inpuut } from "../../components/Input/input";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from "react";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 import { LockKey, User } from "phosphor-react-native";
-import { ButtonBack } from "../components/buttonBack";
+import { ButtonBack } from "../../components/Buttons/buttonBack";
 
 interface DataProps {
     Password: string

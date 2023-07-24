@@ -1,10 +1,10 @@
 import { VStack, Text } from 'native-base'
-import { Buttoon } from '../components/Button'
+import { Buttoon } from '../../components/Buttons/Button'
 import { Link, useNavigation } from '@react-navigation/native';
-import { ButtonHome } from '../components/ButtonHome';
+import { ButtonHome } from '../../components/ButtonHome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
-import { HomeChange } from './HomeClient';
+import { TabBar } from '../../components/TabBar';
 
 //const navigation = useNavigation()
 
@@ -28,7 +28,7 @@ export function Home() {
 
     return (
         <>
-            {client || provider ? <HomeChange />
+            {client || provider ? <TabBar />
                 :
                 <VStack className="flex-1 flex-col justify-center items-center bg-backGround bg-[url('../../assets/Bolinhas.png')]">
                     <VStack className="flex flex-col items-start w-screen">

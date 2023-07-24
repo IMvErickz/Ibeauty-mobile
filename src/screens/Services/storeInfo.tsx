@@ -1,15 +1,16 @@
 import { Text, VStack, ScrollView, Image } from "native-base";
-import { Header } from "../components/header";
-import { CardProducts } from '../components/cardProductsServices.tsx'
+import { Header } from "../../components/header";
+import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from "react";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 import { useQuery } from "react-query";
 
 interface SericoProps {
     NomeServico: string
     img: string
     id: string
+    price: string
 }
 
 interface ServiceProps {
@@ -58,7 +59,9 @@ export function Store() {
                                         <CardProducts
                                             id={e.id}
                                             Name={e.NomeServico}
-                                            img={e.img} />
+                                            img={e.img}
+                                            Price={e.price}
+                                        />
                                     )
                                 })}
                             </VStack></>

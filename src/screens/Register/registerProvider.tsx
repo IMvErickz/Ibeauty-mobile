@@ -1,14 +1,14 @@
 import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button, Select, CheckIcon } from "native-base";
 import { FormEvent, useState, } from "react";
 import { TextInput } from 'react-native'
-import { api } from "../../lib/axios";
-import { Buttoon } from "../components/Button";
-import { Header } from "../components/header";
-import { Inpuut } from "../components/input";
-import { Selection } from "../components/Select";
+import { api } from "../../../lib/axios";
+import { Buttoon } from "../../components/Buttons/Button";
+import { Header } from "../../components/header";
+import { Inpuut } from "../../components/Input/input";
+import { Selection } from "../../components/Select";
 import { ArrowFatLeft, Eye, IconProps } from "phosphor-react-native";
 import { useNavigation } from '@react-navigation/native'
-import { ButtonBack } from "../components/buttonBack";
+import { ButtonBack } from "../../components/Buttons/buttonBack";
 
 export function Provider() {
 

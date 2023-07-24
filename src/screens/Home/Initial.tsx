@@ -1,16 +1,16 @@
 import { Image, Text, VStack, ScrollView, Button } from "native-base";
 import { useEffect, useState, useMemo } from "react";
-import { api } from "../../lib/axios";
-import { CardInitial } from "../components/cardInitial";
+import { api } from "../../../lib/axios";
+import { CardInitial } from "../../components/Cards/cardInitial";
 import { useQuery } from 'react-query'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer, useLinkTo, useNavigation } from '@react-navigation/native'
 
-import { Header } from "../components/header";
-import { Buttoon } from "../components/Button";
+import { Header } from "../../components/header";
+import { Buttoon } from "../../components/Buttons/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CardProducts } from "../components/cardProductsServices.tsx";
-import { Drawer } from "../components/Drawer";
+import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
+import { Drawer } from "../../components/Drawer";
 import { List } from "phosphor-react-native";
 
 interface ProductsProps {
@@ -120,6 +120,7 @@ export function Initial() {
                                         {e.Service.map(service => {
                                             return (
                                                 <CardProducts
+                                                    key={service.id}
                                                     id={service.id}
                                                     Name={service.NameService}
                                                     img={service.img}

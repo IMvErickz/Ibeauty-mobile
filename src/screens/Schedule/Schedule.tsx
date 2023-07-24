@@ -1,9 +1,9 @@
 import { VStack, Text, ScrollView, Button } from "native-base";
-import { Header } from "../components/header";
-import { ButtonBack } from "../components/buttonBack";
+import { Header } from "../../components/header";
+import { ButtonBack } from "../../components/Buttons/buttonBack";
 import { useNavigation } from "@react-navigation/native";
-import { ScheduleDay } from "../components/scheduleDay";
-import { api } from "../../lib/axios";
+import { ScheduleDay } from "../../components/Schedule/scheduleDay";
+import { api } from "../../../lib/axios";
 import { useMemo, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

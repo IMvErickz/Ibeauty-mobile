@@ -1,5 +1,5 @@
 import { VStack } from "native-base";
-import { Payments } from "../Payments";
+import { Payments } from "./Payments";
 import { Clock, CreditCard, Money } from "phosphor-react-native";
 
 export function Buttons() {

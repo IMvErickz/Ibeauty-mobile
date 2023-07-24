@@ -1,6 +1,6 @@
 import { VStack, Text, Button, Image, ScrollView } from "native-base";
-import { Header } from "../components/header";
-import { Buttons } from "../components/payment/Button";
+import { Header } from "../../components/header";
+import { Buttons } from "../../components/payment/Button";
 
 export function Payment() {
 
