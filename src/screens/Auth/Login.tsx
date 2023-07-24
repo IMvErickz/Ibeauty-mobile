@@ -37,7 +37,6 @@ export function Login() {
 
     async function LocalAuth() {
         local = await AsyncStorage.getItem('LocalAuth')
-
         if (local == "Cliente") {
             navigation.navigate('Client')
         } else {

@@ -13,7 +13,6 @@ export function CardProducts({ Name, img, id, Price, ...rest }: CardProps) {
 
     const navigation = useNavigation()
 
-
     async function setIdService() {
         try {
             await AsyncStorage.setItem('idService', id)

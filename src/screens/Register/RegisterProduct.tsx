@@ -83,7 +83,6 @@ export function NewProduct() {
 
         }
 
-
         try {
             const product = await api.post('/service/register', {
                 NameService,

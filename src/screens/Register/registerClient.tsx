@@ -137,6 +137,7 @@ export function Client() {
                             onPress={Register}
                         />
                     </VStack>
+
                     <VStack className='w-full flex flex-col items-start justify-start'>
                         <ButtonBack />
                     </VStack>

@@ -132,8 +132,6 @@ export function Initial() {
                                     </VStack></>
                             )
                         })
-
-
                     }
                 </VStack>
 

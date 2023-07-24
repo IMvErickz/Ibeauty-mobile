@@ -1,7 +1,7 @@
 import { VStack, Text } from 'native-base'
 import { Buttoon } from '../../components/Buttons/Button'
 import { Link, useNavigation } from '@react-navigation/native';
-import { ButtonHome } from '../../components/ButtonHome';
+import { ButtonHome } from '../../components/Buttons/ButtonHome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { TabBar } from '../../components/TabBar';
@@ -42,8 +42,7 @@ export function Home() {
                     <VStack className="flex flex-col justify-center items-center gap-y-6 w-screen">
                         <VStack className='flex flex-col items-start w-screen'>
                             <Text className='text-[#548075] font-semibold text-lg'>
-                                Selecione a opção que você se encaixe!
-                            </Text>
+                                Selecione a opção que você se encaixe!</Text>
                         </VStack>
 
                         <ButtonHome

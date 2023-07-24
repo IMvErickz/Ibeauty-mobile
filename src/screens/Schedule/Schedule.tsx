@@ -60,7 +60,7 @@ export function Schedule() {
                             press={() => navigation.navigate('Hours')}
                             day="Quarta-Feira"
                             dayNumber={e.day}
-                            id="as"
+                            id="ass"
                         />
                     )
                 }

@@ -1,6 +1,6 @@
 import { VStack, Text, Image, ScrollView, Button } from "native-base";
 import { Header } from "../../components/header";
-import { CardProducts } from "../../components/cardProductsServices.tsx";
+import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
 import { Payments } from "../../components/payment/Payments";
 import { Money } from "phosphor-react-native";
 import { useState } from "react";

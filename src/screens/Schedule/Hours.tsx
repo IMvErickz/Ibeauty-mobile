@@ -17,7 +17,6 @@ export function Hours() {
                     </VStack>
                     <VStack className='w-full flex flex-col items-center justify-center'>
                         <Button className='w-full flex flex-col items-start justify-start bg-transparent border-t-2 border-t-borderColor border-b-2 border-b-borderColor'
-
                         >
                             <Text className='hidden'>id</Text>
                             <Text className='text-xl font-semibold'>09:00</Text>

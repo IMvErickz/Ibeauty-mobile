@@ -1,6 +1,6 @@
 import { Button, Text, IButtonProps } from 'native-base'
 
-interface ButtonProps extends IButtonProps{
+interface ButtonProps extends IButtonProps {
     tittle: string,
     color?: string
 }
@@ -14,9 +14,7 @@ export function Buttoon({ tittle, color, ...rest }: ButtonProps) {
             }}
             className={`bg-${color}`}
         >
-            <Text className='text-white font-bold uppercase text-2xl'>
-                {tittle}
-            </Text>
+            <Text className='text-white font-bold uppercase text-2xl'>{tittle}</Text>
         </Button>
     )
 }

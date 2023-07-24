@@ -3,15 +3,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button, Image, Text, VStack } from 'native-base';
 import { Bell, ChatCenteredDots, Gear, MapPin, SignOut } from 'phosphor-react-native';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { api } from '../../lib/axios';
 
 interface DrawerProps {
   open?: string
   close?: () => void
 }
 
+interface DataProps {
+  img: string
+}
 
 export function Drawer(props: DrawerProps) {
+
+  const [data, setData] = useState<DataProps[]>([])
+
+
+
+  const dataMemory = useMemo(async () => {
+    const id = await AsyncStorage.getItem('ProviderId') as string
+    await api.get(`/p/${id}`)
+      .then(function (response) {
+        setData(response.data.response)
+      })
+  }, [])
 
   const navigation = useNavigation()
 
@@ -47,11 +63,15 @@ export function Drawer(props: DrawerProps) {
         </Button>
       </VStack>
       <VStack className='w-full flex flex-row items-center justify-start gap-x-3'>
-        <Image source={{ uri: 'https://s2.glbimg.com/Ha2q-YYa3pCWtwM4E51zi_p-POI=/940x523/e.glbimg.com/og/ed/f/original/2019/02/20/blow-dry-bar-del-mar-chairs-counter-853427.jpg' }}
-          alt='Não encontrado'
-          size={50}
-          className='rounded-full'
-        />
+        {data.map(user => {
+          return (
+            <Image source={{ uri: user.img }}
+              alt='Não encontrado'
+              size={50}
+              className='rounded-full'
+            />
+          )
+        })}
         <Text className='text-black font-bold text-xl'>
           Nome do perfil
         </Text>
