@@ -1,4 +1,4 @@
-import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button, Select, CheckIcon } from "native-base";
+import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button, Select, CheckIcon, Image } from "native-base";
 import { FormEvent, useState, } from "react";
 import { TextInput } from 'react-native'
 import { api } from "../../../lib/axios";
@@ -9,6 +9,7 @@ import { Selection } from "../../components/Select";
 import { ArrowFatLeft, Eye, IconProps } from "phosphor-react-native";
 import { useNavigation } from '@react-navigation/native'
 import { ButtonBack } from "../../components/Buttons/buttonBack";
+import * as ImagePicker from 'expo-image-picker'
 
 export function Provider() {
 
@@ -19,12 +20,51 @@ export function Provider() {
     const [email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [confSenha, setConfSenha] = useState('')
-    const [img, setImg] = useState('')
+    const [preview, setPreview] = useState('')
     const [cellNumber, setCell] = useState('')
     const [cep, setCep] = useState('')
     const [number, setNumber] = useState('')
 
+    async function openImagePicker() {
+        try {
+            const result: any = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 1,
+            });
+
+            if (result.assets[0]) {
+                setPreview(result.assets[0].uri)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+
     async function setProvider() {
+
+        let coverUrl
+
+        if (preview) {
+            const uploadFormData = new FormData()
+
+            uploadFormData.append('file', {
+                name: 'image.jpeg',
+                type: 'image/jpeg',
+                uri: preview
+            } as any)
+
+            const uploadResponse = await api.post('/upload', uploadFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            coverUrl = uploadResponse.data.fileUrl
+
+            console.log('IMAGE URL: ', coverUrl)
+
+        }
 
         try {
             if (Password != confSenha) {
@@ -37,7 +77,7 @@ export function Provider() {
                     Name,
                     email,
                     Password,
-                    img,
+                    img: coverUrl,
                     cellNumber,
                     cep,
                     number
@@ -137,7 +177,10 @@ export function Provider() {
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                         />
                     </VStack>
-                    <Inpuut placeholder="img" onChangeText={setImg} />
+                    <VStack className='flex w-full items-center justify-center gap-y-2'>
+                        {preview && <Image source={{ uri: preview }} alt="Impossível acessar" size={24} />}
+                        <Button onPress={openImagePicker} className='bg-boldColor'><Text className='font-bold text-lg text-white'>Adicinar foto de perfil</Text></Button>
+                    </VStack>
 
                     <VStack className='w-80 flex flex-row items-start justify-start'>
 

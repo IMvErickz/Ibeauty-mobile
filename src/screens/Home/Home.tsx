@@ -31,7 +31,7 @@ export function Home() {
             {client || provider ? <TabBar />
                 :
                 <VStack className="flex-1 flex-col justify-center items-center bg-backGround bg-[url('../../assets/Bolinhas.png')]">
-                    <VStack className="flex flex-col items-start w-screen">
+                    <VStack className="flex flex-col items-start w-screen p-2">
                         <Text className="text-boldColor font-bold text-2xl">
                             Seja Bem vindo ao IBeauty,
                         </Text>
@@ -40,7 +40,7 @@ export function Home() {
                         </Text>
                     </VStack>
                     <VStack className="flex flex-col justify-center items-center gap-y-6 w-screen">
-                        <VStack className='flex flex-col items-start w-screen'>
+                        <VStack className='flex flex-col items-start w-screen p-2'>
                             <Text className='text-[#548075] font-semibold text-lg'>
                                 Selecione a opção que você se encaixe!</Text>
                         </VStack>
