@@ -79,10 +79,6 @@ export function Initial() {
 
     Change()
 
-    ProviderData.map(e => e.Service.map(el => console.log(el.img)))
-
-
-
     return (
         <ScrollView bg='white'>
             <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>

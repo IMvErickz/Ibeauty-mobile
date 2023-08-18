@@ -4,7 +4,7 @@ import { Header } from "../../components/header";
 import { Inpuut } from "../../components/Input/input";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "../../../lib/axios";
 import { LockKey, User } from "phosphor-react-native";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
@@ -21,15 +21,16 @@ export function Login() {
     //console.log(tittle)
 
     async function setPageName() {
-        try {
-            let name = await AsyncStorage.getItem('LocalAuth')
 
-            setTittle(name as string)
-        } catch (error) {
-            alert(error)
-            throw error
-        }
     }
+
+    const memory = useMemo(async () => {
+        let name = await AsyncStorage.getItem('LocalAuth')
+
+        setTittle(name as string)
+    }, [tittle])
+
+    console.log('mem', tittle)
 
     const navigation = useNavigation()
 
