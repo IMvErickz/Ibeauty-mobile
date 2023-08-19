@@ -1,29 +1,29 @@
-import { VStack, ScrollView, Text, Button } from "native-base";
 import { Header } from "../../components/header";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 
 export function Hours() {
     return (
         <ScrollView >
-            <VStack w='100%' h='100%' display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                <VStack className="w-full flex flex-col items-center justify-center">
+            <View className="w-full h-full flex items-center justify-center">
+                <View className="w-full flex flex-col items-center justify-center">
                     <Header
                         ButtonBack={<ButtonBack />}
                     />
-                </VStack>
-                <VStack className='w-full flex flex-col items-center justify-center gap-y-8'>
-                    <VStack className='w-full flex flex-col items-start justify-start py-2'>
+                </View>
+                <View className='w-full flex flex-col items-center justify-center gap-y-8'>
+                    <View className='w-full flex flex-col items-start justify-start py-2'>
                         <Text className='text-xl font-semibold ml-4'>Selecione um horário:</Text>
-                    </VStack>
-                    <VStack className='w-full flex flex-col items-center justify-center'>
-                        <Button className='w-full flex flex-col items-start justify-start bg-transparent border-t-2 border-t-borderColor border-b-2 border-b-borderColor'
+                    </View>
+                    <View className='w-full flex flex-col items-center justify-center'>
+                        <TouchableOpacity className='w-full flex flex-col items-start justify-start bg-transparent border-t-2 border-t-borderColor border-b-2 border-b-borderColor'
                         >
                             <Text className='hidden'>id</Text>
                             <Text className='text-xl font-semibold'>09:00</Text>
-                        </Button>
-                    </VStack>
-                </VStack>
-            </VStack>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
         </ScrollView>
     )
 }

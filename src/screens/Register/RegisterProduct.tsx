@@ -1,15 +1,14 @@
-import { Text, VStack, ScrollView, Image, Button, FormControl, Input, Select, CheckIcon } from "native-base";
+import { FormControl, Select, CheckIcon } from "native-base";
 import { Header } from "../../components/header";
-import { Buttoon } from "../../components/Buttons/Button";
 import { Inpuut } from "../../components/Input/input";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
 import * as ImagePicker from 'expo-image-picker';
 import { api } from "../../../lib/axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import sizes from "native-base/lib/typescript/theme/base/sizes";
+import * as SecureStorage from 'expo-secure-store'
+import { View, TouchableOpacity, Text, ScrollView, Image } from 'react-native'
 
 
 interface SelectionProps {
@@ -43,7 +42,7 @@ export function NewProduct() {
     const [id, getId] = useState('')
     console.log(id)
     async function StoreServices() {
-        let nameLocal = await AsyncStorage.getItem('ProviderId')
+        let nameLocal = await SecureStorage.getItemAsync('ProviderId')
         getId(nameLocal as string)
     }
 
@@ -105,74 +104,68 @@ export function NewProduct() {
     return (
         <FormControl>
             <ScrollView>
-                <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
-                    <VStack w="full" alignItems={"center"} justifyContent={'center'}>
+                <View className="w-full h-full flex items-center justify-center">
+                    <View className="w-full flex items-center justify-center">
                         <Header
                             text="Novo Produto"
                             ButtonBack={<ButtonBack />}
                         />
-                    </VStack>
-                    <VStack className='w-full flex flex-col items-start justify-start ml-8 py-8'>
+                    </View>
+                    <View className='w-full flex flex-col items-start justify-start ml-8 py-8'>
                         <Text className='text-2xl font-semibold'>Adição de produto/serviço</Text>
-                    </VStack>
-                    <VStack className='w-full flex flex-row items-center justify-center gap-x-4'>
-                        <VStack className='rounded-full bg-borderColor w-16 h-16 flex flex-col items-center justify-center'>
+                    </View>
+                    <View className='w-full flex flex-row items-center justify-center gap-x-4'>
+                        <View className='rounded-full bg-borderColor w-16 h-16 flex flex-col items-center justify-center'>
                             <Text className='text-black font-bold text-xl'>Foto</Text>
-                        </VStack>
+                        </View>
                         <Text className='text-black font-semibold text-xl'>Nome do serviço</Text>
                         <Text className='text-black font-semibold text-xl'>valor Cobrado</Text>
-                    </VStack>
+                    </View>
 
-                    <VStack className='bg-borderColor w-full h-1'><Text className='text-white'>oi</Text></VStack>
+                    <View className='bg-borderColor w-full h-1'><Text className='text-white'>oi</Text></View>
 
-                    <VStack className='w-full flex flex-row items-center justify-center py-12 gap-x-4'>
+                    <View className='w-full flex flex-row items-center justify-center py-12 gap-x-4'>
                         <Image
-                            alt='Imagem não encontrada'
                             source={{
                                 uri: preview
                             }}
-                            size={24}
+                            className="w-6"
                         />
 
-                        <Button onPress={openImagePicker} className='bg-boldColor'><Text className='font-bold text-lg text-white'>Trocar foto do serviço</Text></Button>
+                        <TouchableOpacity onPress={openImagePicker} className='w-44 flex items-center rounded-lg justify-center bg-boldColor'><Text className='font-bold text-center text-lg text-white'>Trocar foto do serviço</Text></TouchableOpacity>
 
-                    </VStack>
+                    </View>
 
-                    <VStack className='w-full flex flex-col items-start justify-start gap-y-8'>
-                        <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
+                    <View className='w-full flex px-4 flex-col items-start justify-start gap-y-8'>
+                        <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Nome do Serviço:</Text>
-                            <VStack className='w-full flex flex-col items-center justify-center '>
+                            <View className='w-full flex flex-col items-center justify-center '>
                                 <Inpuut
-                                    width={'341'}
-                                    marginRight={'4'}
-                                    backgroundColor={'#F1F1F1'}
-                                    className="bg-borderColor"
+                                    className="bg-borderColor rounded-lg w-full h-12 p-2"
                                     onChangeText={setName}
                                 />
-                            </VStack>
-                        </VStack>
+                            </View>
+                        </View>
 
-                        <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
+                        <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Valor a ser cobrado:</Text>
-                            <VStack className='w-full flex flex-col items-center justify-center '>
+                            <View className='w-full flex flex-col items-center justify-center '>
                                 <Inpuut
-                                    width={'341'}
-                                    marginRight={'4'}
-                                    backgroundColor={'#F1F1F1'}
-                                    className="bg-borderColor"
+                                    className="bg-borderColor rounded-lg w-full h-12 p-2"
                                     onChangeText={setPrice}
                                     keyboardType="number-pad"
                                 />
-                            </VStack>
-                        </VStack>
+                            </View>
+                        </View>
 
-                        <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
+                        <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Tipo de Serviço:</Text>
-                            <VStack className='w-full flex flex-col items-center justify-center '>
+                            <View className='w-full flex flex-col items-center justify-center '>
                                 <Select backgroundColor={'#D9D9D9'}
                                     accessibilityLabel="Selecione a categoria"
                                     placeholder="Selecione a categoria"
                                     borderWidth={0}
+                                    borderRadius={8}
                                     width={'341'}
                                     _selectedItem={{
                                         bg: "teal.600",
@@ -184,31 +177,27 @@ export function NewProduct() {
                                         )
                                     })}
                                 </Select>
-                            </VStack>
-                        </VStack>
+                            </View>
+                        </View>
 
-                        <VStack className='w-full flex flex-col items-start justify-start gap-y-2'>
+                        <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Descrição do Serviço</Text>
-                            <VStack className='w-full flex flex-col items-center justify-center '>
+                            <View className='w-full flex flex-col items-center justify-center '>
                                 <Inpuut
-                                    width={'341'}
-                                    height={'200'}
-                                    marginRight={'4'}
-                                    backgroundColor={'#F1F1F1'}
-                                    className="bg-borderColor"
+                                    className="bg-borderColor w-full h-44 rounded-lg"
                                     onChangeText={setDesc}
                                 />
-                            </VStack>
-                        </VStack>
+                            </View>
+                        </View>
 
-                        <VStack className="w-full flex flex-col items-center justify-center gap-y-4">
-                            <Button onPress={ProductOrService} className='bg-boldColor w-80'><Text className='font-bold text-lg text-white'>Salvar Alterações</Text></Button>
-                            <Button className='bg-[#D14747A3] w-80'>
+                        <View className="w-full pb-4 flex flex-col items-center justify-center gap-y-4">
+                            <TouchableOpacity onPress={ProductOrService} className='bg-boldColor w-full h-12 rounded-lg flex items-center justify-center'><Text className='font-bold text-lg text-white'>Salvar Alterações</Text></TouchableOpacity>
+                            <TouchableOpacity className='bg-[#D14747A3] w-full h-12 rounded-lg flex items-center justify-center'>
                                 <Text className='font-bold text-lg text-white' onPress={() => navigation.goBack()}>Descartar</Text>
-                            </Button>
-                        </VStack>
-                    </VStack>
-                </VStack>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
             </ScrollView>
         </FormControl>
     )

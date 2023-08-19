@@ -1,4 +1,4 @@
-import { Button, Text, VStack } from "native-base";
+import { View, Text, TouchableOpacity } from 'react-native'
 
 interface PaymentsProps {
     Type: string
@@ -8,15 +8,13 @@ interface PaymentsProps {
 export function Payments(props: PaymentsProps) {
 
     return (
-        <VStack className="w-full flex items-start">
-            <Button
-                leftIcon={props.Icon}
-
+        <View className="w-full flex items-start">
+            <TouchableOpacity
                 className="bg-white w-full justify-start border-t-borderColor border-b-borderColor border-t-2 border-b-2"
             >
                 <Text className="text-black font-bold text-xl">{props.Type}</Text>
-            </Button>
-        </VStack>
+            </TouchableOpacity>
+        </View>
 
     )
 }

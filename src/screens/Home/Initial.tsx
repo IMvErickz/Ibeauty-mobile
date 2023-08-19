@@ -1,17 +1,16 @@
-import { Image, Text, VStack, ScrollView, Button } from "native-base";
+import { Image, Text, Button } from "native-base";
 import { useEffect, useState, useMemo } from "react";
 import { api } from "../../../lib/axios";
 import { CardInitial } from "../../components/Cards/cardInitial";
-import { useQuery } from 'react-query'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer, useLinkTo, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 
 import { Header } from "../../components/header";
 import { Buttoon } from "../../components/Buttons/Button";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStorage from 'expo-secure-store'
 import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
 import { Drawer } from "../../components/Drawer";
 import { List } from "phosphor-react-native";
+import { View, ScrollView } from "react-native";
 
 interface ProductsProps {
     Name: string
@@ -56,7 +55,7 @@ export function Initial() {
 
     const [providerID, getProviderID] = useState('')
     async function StoreServices() {
-        const id = await AsyncStorage.getItem('ProviderId')
+        const id = await SecureStorage.getItemAsync('ProviderId')
         getProviderID(id as string)
         //console.log(name)
     }
@@ -73,24 +72,24 @@ export function Initial() {
     const [change, getChange] = useState('')
     //alert(change)
     async function Change() {
-        const category = await AsyncStorage.getItem('LocalAuth')
+        const category = await SecureStorage.getItemAsync('LocalAuth')
         getChange(category as string)
     }
 
     Change()
 
     return (
-        <ScrollView bg='white'>
-            <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
-                <VStack w="full" alignItems={"center"} justifyContent={'center'}>
+        <ScrollView className="bg-white">
+            <View className="w-full h-full flex items-center justify-center">
+                <View className="w-full flex items-center justify-center">
                     <Header List={<Button className="bg-transparent" onPress={() => navigation.navigate('sidebar')}>
                         <List size={32} color="#416058" weight="fill" />
                     </Button>} />
-                </VStack>
-                <VStack className="w-full">
+                </View>
+                <View className="w-full">
                     <Drawer open={drawer} />
-                </VStack>
-                <VStack w="full" alignItems={'center'} justifyContent="center" display={'flex'} flexDirection="column" className="py-8" bg={'white'}>
+                </View>
+                <View className='w-full flex items-center justify-center flex-col py-8 bg-white'>
                     {change == "Cliente" ?
                         ServicesData?.map(e => {
                             return (
@@ -106,13 +105,13 @@ export function Initial() {
 
                         ProviderData?.map(e => {
                             return (
-                                <><VStack className=' w-full h-max flex flex-row items-center justify-center gap-x-4' key={e.Name}>
+                                <><View className=' w-full h-max flex flex-row items-center justify-center gap-x-4' key={e.Name}>
                                     <Text className="font-bold text-xl">{e.Name}</Text>
                                     <Image source={{ uri: e.img }}
                                         alt="Imagem não encontrada"
                                         size="lg"
                                         className="rounded-full static" />
-                                </VStack><VStack className="w-full flex flex-col items-center justify-center">
+                                </View><View className="w-full flex flex-col items-center justify-center">
                                         {e.Service.map(service => {
                                             return (
                                                 <CardProducts
@@ -124,14 +123,16 @@ export function Initial() {
                                                 />
                                             )
                                         })}
-                                        <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16" onPress={() => navigation.navigate('NewProduct')} />
-                                    </VStack></>
+                                        <View className="w-full flex items-center justify-center px-4 py-2">
+                                            <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16 flex rounded-lg items-center justify-center" onPress={() => navigation.navigate('NewProduct')} />
+                                        </View>
+                                    </View></>
                             )
                         })
                     }
-                </VStack>
+                </View>
 
-            </VStack>
+            </View>
         </ScrollView>
     )
 }

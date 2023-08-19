@@ -1,6 +1,6 @@
-import { FormControl, VStack, Text, Checkbox, ScrollView, Input, Button, Select, CheckIcon, Image } from "native-base";
+import { FormControl, Checkbox, Select, CheckIcon } from "native-base";
 import { FormEvent, useState, } from "react";
-import { TextInput } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { api } from "../../../lib/axios";
 import { Buttoon } from "../../components/Buttons/Button";
 import { Header } from "../../components/header";
@@ -94,47 +94,48 @@ export function Provider() {
     return (
         <FormControl>
             <ScrollView>
-                <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"} className="bg-white">
-                    <VStack w="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
+                <View className="w-full h-full flex items-center justify-center bg-white">
+                    <View className="w-full flex items-center justify-center">
                         <Header
                             text="Novo Prestador"
                         />
-                    </VStack>
-                    <VStack className=' w-full flex flex-col items-start justify-start'>
+                    </View>
+                    <View className='w-full flex flex-col items-start justify-start'>
                         <Text className="text-black font-semibold text-4xl">Seus Dados:</Text>
-                    </VStack>
-                    <VStack className="w-60 flex flex-row items-center justify-center p-5">
+                    </View>
+                    <View className="w-60 flex gap-x-4 flex-row items-center justify-center p-5">
                         <Inpuut
-                            width={'190'}
-                            marginRight={'2'}
+                            className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             placeholder='Nome do estabelecimento'
                             onChangeText={setName}
                         />
 
                         <Inpuut
-                            width={'190'}
+                            className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
+                            widht={'190'}
                             placeholder='CPF ou CNPJ'
                             onChangeText={setCNPJ}
                         />
-                    </VStack>
+                    </View>
 
-                    <VStack className="w-60 flex flex-row items-center justify-center p-5">
+                    <View className="w-60 flex gap-x-4 flex-row items-center justify-center p-5">
                         <Inpuut
-                            width={'190'}
-                            marginRight={'2'}
+                            widht={'190'}
+                            className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             placeholder='Telefone'
                             onChangeText={setCell}
                         />
 
                         <Inpuut
-                            width={'190'}
+                            className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
+                            widht={'190'}
                             placeholder='CEP'
                             onChangeText={setCep}
                         />
 
-                    </VStack>
+                    </View>
 
-                    <VStack className="w-full flex flex-col items-center justify-center p-5">
+                    <View className="w-full flex flex-col items-center justify-center p-5">
                         <Select backgroundColor={'#D9D9D9'}
                             accessibilityLabel="Selecione a categoria"
                             placeholder="Selecione a categoria"
@@ -148,66 +149,71 @@ export function Provider() {
                             <Select.Item label="oi" value="oi" />
 
                         </Select>
-                    </VStack>
+                    </View>
 
-                    <VStack className=' w-full flex flex-col items-start justify-start'>
+                    <View className=' w-full flex flex-col items-start justify-start'>
                         <Text className="text-black font-semibold text-4xl">Dados de login:</Text>
-                    </VStack>
+                    </View>
 
-                    <VStack className="w-full flex flex-col items-center justify-center p-5 ">
+                    <View className="w-full flex flex-col items-center justify-center p-5 ">
                         <Inpuut
-                            width={'190'}
+                            widht={'190'}
                             placeholder='Número'
                             onChangeText={setNumber}
+                            className="bg-[#F1F1F1] w-full h-12 rounded-lg"
                         />
-                        <VStack className="w-full flex flex-col items-start, justify-start">
+                        <View className="w-full flex flex-col items-start, justify-start">
                             <Text>Email</Text>
-                        </VStack>
-                        <Inpuut onChangeText={setEmail} />
-                        <VStack className="w-full flex flex-col items-start, justify-start">
+                        </View>
+                        <Inpuut onChangeText={setEmail} className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg" />
+                        <View className="w-full flex flex-col items-start justify-start">
                             <Text>Senha</Text>
-                        </VStack>
+                        </View>
                         <Inpuut onChangeText={setPassword}
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
+                            className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg"
                         />
-                        <VStack className="w-full flex flex-col items-start, justify-start">
+                        <View className="w-full flex flex-col items-start, justify-start">
                             <Text>Confirme sua senha</Text>
-                        </VStack>
+                        </View>
                         <Inpuut onChangeText={setConfSenha}
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
+                            className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg"
                         />
-                    </VStack>
-                    <VStack className='flex w-full items-center justify-center gap-y-2'>
-                        {preview && <Image source={{ uri: preview }} alt="Impossível acessar" size={24} />}
-                        <Button onPress={openImagePicker} className='bg-boldColor'><Text className='font-bold text-lg text-white'>Adicinar foto de perfil</Text></Button>
-                    </VStack>
+                    </View>
+                    <View className='flex w-full px-4 items-center justify-center gap-y-2'>
+                        {preview && <Image source={{ uri: preview }} className="w-24 h-24" />}
+                        <TouchableOpacity onPress={openImagePicker} className='bg-boldColor w-full items-center justify-center h-12 rounded-lg'>
+                            <Text className='font-bold text-lg text-white'>Adicinar foto de perfil</Text>
+                        </TouchableOpacity>
+                    </View>
 
-                    <VStack className='w-80 flex flex-row items-start justify-start'>
+                    <View className='w-80 flex flex-row items-start justify-start'>
 
                         <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                             <Text className='text-black font-bold text-xl'>Eu li e concordo com os</Text>
                         </Checkbox>
 
-                    </VStack>
+                    </View>
 
-                    <VStack className='w-80 flex flex-row items-start justify-start'>
+                    <View className='w-80 flex flex-row items-start justify-start'>
 
                         <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                             <Text className='text-black font-bold text-xl'>Concordo em receber notificações de Ofertas e Produtos</Text>
                         </Checkbox>
-                    </VStack>
-                    <VStack className="w-full flex flex-col items-center justify-center">
+                    </View>
+                    <View className="w-full px-4 flex flex-col items-center justify-center">
                         <Buttoon
                             tittle="Confirmar cadastro"
-                            bg='#4D4D4D'
+                            className='bg-[#4D4D4D] w-full flex items-center justify-center h-12'
                             onPress={setProvider}
                         />
-                    </VStack>
+                    </View>
 
-                    <VStack className="w-full flex flex-col items-start justify-start">
+                    <View className="w-full flex flex-col items-start justify-start p-4">
                         <ButtonBack />
-                    </VStack>
-                </VStack>
+                    </View>
+                </View>
             </ScrollView>
         </FormControl>
     )

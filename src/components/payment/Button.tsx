@@ -1,6 +1,6 @@
-import { VStack } from "native-base";
 import { Payments } from "./Payments";
 import { Clock, CreditCard, Money } from "phosphor-react-native";
+import { View } from 'react-native'
 
 export function Buttons() {
     const paymentsMode = [{
@@ -25,8 +25,8 @@ export function Buttons() {
     }]
 
     return (
-        <VStack className='w-full h-full p-5'>
-            <VStack>
+        <View className='w-full h-full p-5'>
+            <View>
                 {paymentsMode.map(pay => {
                     return (
                         <Payments
@@ -36,7 +36,7 @@ export function Buttons() {
                         />
                     )
                 })}
-            </VStack>
-        </VStack>
+            </View>
+        </View>
     )
 }

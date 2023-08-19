@@ -1,6 +1,6 @@
-import { VStack, Image, Text, Button } from "native-base";
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 interface CardProps {
     Name: string
@@ -24,26 +24,24 @@ export function CardProducts({ Name, img, id, Price, ...rest }: CardProps) {
     }
 
     return (
-        <Button className="w-full bg-white border-none" onPress={setIdService}>
-            <VStack w='96' className="h-28 flex flex-row items-center justify-start border-borderColor border-t-2 border-b-2 border-solid gap-x-2">
+        <TouchableOpacity className="w-full bg-white border-none" onPress={setIdService}>
+            <View className="w-full h-28 flex flex-row items-center justify-start border-borderColor border-t-2 border-b-2 border-solid space-x-8">
                 <Image
                     source={{ uri: img }}
-                    alt="Imagem não encontrada"
-                    size={24}
-                    className="rounded-full"
+                    className="rounded-full w-20 h-20"
                 />
-                <VStack className="flex flex-row items-center justify-center gap-x-4">
-                    <VStack className="h-full w-full flex flex-row items-center justify-start">
-                        <VStack className="w-40 flex items-start justify-start">
+                <View className="flex flex-row items-center justify-center gap-x-4">
+                    <View className="h-full w-full flex flex-row items-center justify-start">
+                        <View className="w-40 flex items-start justify-start">
                             <Text className="font-semibold text-xl text-black">{Name}</Text>
-                        </VStack>
+                        </View>
 
-                        <VStack className="w-36 flex items-center justify-center">
+                        <View className="w-36 flex items-center justify-center">
                             <Text className="font-semibold text-xl text-black">R${Price}</Text>
-                        </VStack>
-                    </VStack>
-                </VStack>
-            </VStack>
-        </Button>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </TouchableOpacity>
     )
 }

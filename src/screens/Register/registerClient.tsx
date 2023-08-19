@@ -1,4 +1,4 @@
-import { Text, VStack, ScrollView, FormControl, Checkbox } from 'native-base'
+import { FormControl, Checkbox } from 'native-base'
 import { Buttoon } from '../../components/Buttons/Button'
 import { Header } from '../../components/header'
 import { Inpuut } from '../../components/Input/input'
@@ -7,6 +7,7 @@ import { ButtonBack } from '../../components/Buttons/buttonBack'
 import { useState } from 'react'
 import { api } from '../../../lib/axios'
 import { useNavigation } from '@react-navigation/native'
+import { View, Text, ScrollView } from 'react-native'
 
 export function Client() {
 
@@ -42,106 +43,102 @@ export function Client() {
     return (
         <FormControl>
             <ScrollView>
-                <VStack w="100%" h="100%" alignItems={"center"} justifyContent={"center"} display={"flex"} className="bg-white">
-                    <VStack w="100%" alignItems={"center"} justifyContent={"center"} display={"flex"}>
+                <View className="w-full h-full flex items-center justify-centerbg-white">
+                    <View className='w-full flex items-center justify-center'>
                         <Header
                             text='Novo Cliente'
                         />
-                    </VStack>
-                    <VStack className=' w-full flex flex-col items-start justify-start'>
+                    </View>
+                    <View className=' w-full flex flex-col items-start justify-start'>
                         <Text className='text-black font-semibold text-4xl'>Seus Dados</Text>
-                    </VStack>
-                    <VStack className='w-60 flex flex-row items-center justify-center p-5'>
+                    </View>
+                    <View className='w-60 flex flex-row items-center justify-center p-5'>
                         <Inpuut
-                            width={'190'}
-                            marginRight={'4'}
+                            widht='190'
                             placeholder='Nome'
                             onChangeText={setName}
                         />
 
                         <Inpuut
-                            width={'190'}
-                            placeholder='Sobrenome'
+                            widht='190'
                         />
-                    </VStack>
+                    </View>
 
-                    <VStack className='w-60 flex flex-row items-center justify-center p-5'>
+                    <View className='w-60 flex flex-row items-center justify-center p-5'>
                         <Inpuut
-                            width={'190'}
-                            marginRight={'4'}
+                            widht='190'
                             placeholder='Telefone (opcional)'
                             onChangeText={setcellNumber}
                         />
 
                         <Inpuut
-                            width={'190'}
+                            widht='190'
                             placeholder='Data de nascimento'
                             onChangeText={setDate}
                         />
-                    </VStack>
+                    </View>
 
-                    <VStack className='w-full flex flex-col items-center justify-center'>
+                    <View className='w-full flex flex-col items-center justify-center'>
                         <Text className='text-black font-semibold text-4xl'>Dados de Login</Text>
-                    </VStack>
+                    </View>
 
-                    <VStack flex={1} justifyContent='center' alignItems={'center'} className='flex flex-col items-center justify-center w-full'>
-                        <VStack className='w-full flex flex-col items-start justify-start'>
+                    <View className='flex flex-col items-center justify-center w-full'>
+                        <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">CPF</Text>
-                        </VStack>
-                        <Inpuut width={'381'} onChangeText={setCPF} />
+                        </View>
+                        <Inpuut widht='381' onChangeText={setCPF} />
 
-                        <VStack className='w-full flex flex-col items-start justify-start'>
+                        <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Email</Text>
-                        </VStack>
-                        <Inpuut width={'381'} onChangeText={setEmail} />
+                        </View>
+                        <Inpuut widht='381' onChangeText={setEmail} />
 
-                        <VStack className='w-full flex flex-col items-start justify-start'>
+                        <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Confirme seu Email</Text>
-                        </VStack>
-                        <Inpuut width={'381'} />
+                        </View>
+                        <Inpuut widht='381' />
 
-                        <VStack className='w-full flex flex-col items-start justify-start'>
+                        <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Senha</Text>
-                        </VStack>
-                        <Inpuut width={'381'}
+                        </View>
+                        <Inpuut widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             onChangeText={setPassword}
                         />
 
-                        <VStack className='w-full flex flex-col items-start justify-start'>
+                        <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Confirme sua Senha</Text>
-                        </VStack>
-                        <Inpuut width={'381'}
+                        </View>
+                        <Inpuut widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                         />
 
-                        <VStack className='w-full flex flex-row items-start justify-start'>
+                        <View className='w-full flex flex-row items-start justify-start'>
 
                             <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                                 <Text className='text-black font-bold text-xl'>Eu li e concordo com os</Text>
                             </Checkbox>
 
-                        </VStack>
+                        </View>
 
-                        <VStack className='w-full flex flex-row items-start justify-start'>
+                        <View className='w-full flex flex-row items-start justify-start'>
 
                             <Checkbox flexDirection={'row-reverse'} colorScheme="gray" value={'i'}>
                                 <Text className='text-black font-bold text-xl'>Concordo em receber notificações de Ofertas e Produtos</Text>
                             </Checkbox>
-                        </VStack>
+                        </View>
 
                         <Buttoon
                             tittle='Finalizar Cadastro'
-                            bg='#4D4D4D'
-                            width={'341'}
+                            color='#4D4D4D'
                             onPress={Register}
                         />
-                    </VStack>
+                    </View>
 
-                    <VStack className='w-full flex flex-col items-start justify-start'>
+                    <View className='w-full flex flex-col items-start justify-start'>
                         <ButtonBack />
-                    </VStack>
-                </VStack>
+                    </View>
+                </View>
             </ScrollView>
         </FormControl>
 

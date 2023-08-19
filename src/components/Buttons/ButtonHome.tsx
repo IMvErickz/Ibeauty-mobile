@@ -1,7 +1,9 @@
-import { Button, Text, IButtonProps } from 'native-base'
+import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-interface ButtonProps extends IButtonProps {
+interface ButtonProps extends Readonly<TouchableOpacityProps> {
     tittle: string,
     color?: string
 }
@@ -9,17 +11,14 @@ interface ButtonProps extends IButtonProps {
 export function ButtonHome({ tittle, color, ...rest }: ButtonProps) {
 
     async function SetLocalAuth() {
-        await AsyncStorage.setItem('LocalAuth', tittle)
+        await SecureStore.setItemAsync('LocalAuth', tittle)
     }
     return (
-        <Button
+        <TouchableOpacity
             {...rest}
-            _pressed={{
-                bg: 'primary.200'
-            }}
-            className={`bg-${color}`}
+            className={`bg-${color} items-center justify-center flex rounded-lg`}
             onPress={SetLocalAuth}>
-            <Text className='text-white font-bold uppercase text-2xl'>{tittle}</Text>
-        </Button>
+            <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>{tittle}</Text>
+        </TouchableOpacity>
     )
 }

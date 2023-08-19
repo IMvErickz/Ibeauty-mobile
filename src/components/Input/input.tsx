@@ -1,21 +1,18 @@
-import { Input, IInputProps } from 'native-base'
+import { TextInput, TextInputProps } from 'react-native'
 
-interface InputProps extends IInputProps {
+interface InputProps extends Readonly<TextInputProps> {
     placeholder?: string
     RightIcon?: JSX.Element
     LeftIcon?: JSX.Element
+    widht?: string
 }
 
-export function Inpuut({placeholder, RightIcon, LeftIcon, ...rest}: InputProps) {
+export function Inpuut({ placeholder, RightIcon, LeftIcon, widht, ...rest }: InputProps) {
     return (
-        <Input
+        <TextInput
             placeholder={placeholder}
-            backgroundColor="#F1F1F1"
-            borderWidth='0'
-            color={'black'}
             {...rest}
-            InputLeftElement={LeftIcon}
-            InputRightElement={RightIcon}
+
         />
     )
 }

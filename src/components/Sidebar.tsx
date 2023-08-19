@@ -1,14 +1,13 @@
-import { useState } from "react";
 import { Drawer } from "./Drawer";
 import { useNavigation } from "@react-navigation/native";
-import { VStack } from "native-base";
+import { View } from 'react-native'
 
 export function SideBar() {
 
     const navigation = useNavigation()
     return (
-        <VStack className="w-full h-full">
+        <View className="w-full h-full">
             <Drawer close={() => navigation.navigate('change')} />
-        </VStack>
+        </View>
     )
 }

@@ -1,7 +1,7 @@
 import { CheckIcon, Select } from "native-base";
 import { useEffect, useState } from "react";
 
-interface SelectionProps{
+interface SelectionProps {
     Title: string
     PlaceHolder: string
     Item: string
@@ -19,9 +19,9 @@ export function Selection(props: SelectionProps) {
             borderWidth={0}
             width={'full'}
             _selectedItem={{
-        bg: "teal.600",
-        endIcon: <CheckIcon size={8} />
-      }} mt="1">
+                bg: "teal.600",
+                endIcon: <CheckIcon size={8} />
+            }} mt="1">
             <Select.Item label={props.Item} value={props.ValueItem} />
         </Select>
     )

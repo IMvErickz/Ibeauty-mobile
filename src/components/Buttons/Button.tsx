@@ -1,20 +1,16 @@
-import { Button, Text, IButtonProps } from 'native-base'
+import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native'
 
-interface ButtonProps extends IButtonProps {
+interface ButtonProps extends Readonly<TouchableOpacityProps> {
     tittle: string,
     color?: string
 }
 
 export function Buttoon({ tittle, color, ...rest }: ButtonProps) {
     return (
-        <Button
+        <TouchableOpacity
             {...rest}
-            _pressed={{
-                bg: 'primary.200'
-            }}
-            className={`bg-${color}`}
         >
             <Text className='text-white font-bold uppercase text-2xl'>{tittle}</Text>
-        </Button>
+        </TouchableOpacity>
     )
 }

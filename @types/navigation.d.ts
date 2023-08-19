@@ -1,18 +1,18 @@
 export declare global {
     namespace ReactNavigation {
         interface RootParamList {
-            Provider: undefined
-            Client: undefined
-            auth: undefined
-            store: undefined
-            change: undefined
-            initial: undefined
-            NewProduct: undefined
-            Schedule: undefined
-            Hours: undefined
+            Provider: screen
+            Client: screen
+            auth: screen
+            store: screen
+            change: screen
+            initial: screen
+            NewProduct: screen
+            Schedule: screen
+            Hours: screen
             pastService: undefine
-            sidebar: undefined
-            psplash: undefined
+            sidebar: screen
+            psplash: screen
         }
     }
 }

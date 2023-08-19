@@ -1,13 +1,13 @@
-import { VStack, Link, Text } from "native-base";
+import { Link, Text } from "native-base";
 import { Buttoon } from "../../components/Buttons/Button";
 import { Header } from "../../components/header";
 import { Inpuut } from "../../components/Input/input";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useEffect, useMemo, useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import * as SecureStorage from 'expo-secure-store'
+import { useEffect, useState } from "react";
 import { api } from "../../../lib/axios";
-import { LockKey, User } from "phosphor-react-native";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
+import { View } from 'react-native'
 
 interface DataProps {
     Password: string
@@ -17,48 +17,32 @@ interface DataProps {
 
 export function Login() {
 
-    const [tittle, setTittle] = useState('')
-    //console.log(tittle)
+    const { params } = useRoute()
 
-    async function setPageName() {
-
-    }
-
-    const memory = useMemo(async () => {
-        let name = await AsyncStorage.getItem('LocalAuth')
-
-        setTittle(name as string)
-    }, [tittle])
-
-    console.log('mem', tittle)
+    const { title }: any = params
 
     const navigation = useNavigation()
 
-    let local: any
-
     async function LocalAuth() {
-        local = await AsyncStorage.getItem('LocalAuth')
-        if (local == "Cliente") {
+        if (title == "Cliente") {
             navigation.navigate('Client')
         } else {
             navigation.navigate('Provider')
         }
     }
-    setPageName()
 
     const [route, setRoute] = useState('')
-    //console.log(route)
     const [email, getEmail] = useState('')
     const [pass, getPass] = useState('')
     const [data, getResponseData] = useState<DataProps[]>([])
 
     useEffect(() => {
-        if (tittle == "Cliente") {
+        if (title == "Cliente") {
             setRoute("client")
         } else {
             setRoute('provider')
         }
-    })
+    }, [])
 
     async function SetLogin() {
         try {
@@ -68,12 +52,14 @@ export function Login() {
                 })
 
             data.map(async e => {
-                if (tittle == "Cliente") {
-                    await AsyncStorage.setItem('ClientId', e.CPF)
+                if (title == "Cliente") {
+                    await SecureStorage.setItemAsync('ClientId', e.CPF)
                     navigation.navigate('change')
                 } else {
-                    await AsyncStorage.setItem('ProviderId', e.CNPJ)
-                    navigation.navigate('change')
+                    await SecureStorage.setItemAsync('ProviderId', e.CNPJ)
+                    navigation.navigate('change', {
+                        providerId: e.CNPJ
+                    })
                 }
             })
 
@@ -85,19 +71,19 @@ export function Login() {
         }
     }
     return (
-        <VStack
-            className='bg-white' w="full" h="full" alignItems={'center'}>
-            <VStack width={'100%'} alignItems={'center'} justifyContent={'center'} display={'flex'} >
+        <View
+            className='bg-white w-full h-full items-center'>
+            <View className="w-full flex items-center justify-center" >
                 <Header
-                    text={tittle}
+                    text={title}
                 />
-            </VStack>
-            <VStack className="w-full h-full flex flex-col items-center justify-center gap-y-8">
-                <VStack className="w-full flex flex-col items-start justify-start ml-4">
+            </View>
+            <View className="w-full h-full flex flex-col items-center justify-center gap-y-8">
+                <View className="w-full flex flex-col items-start justify-start ml-4">
                     <Text className="text-LabelColor font-bold text-4xl">Conta IBeauty</Text>
-                </VStack>
-                <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
-                    <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
+                </View>
+                <View className="w-full px-4 flex items-center justify-center">
+                    <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
                         {data.map(e => {
                             if (e.Password != pass) {
@@ -106,16 +92,16 @@ export function Login() {
                                 )
                             }
                         })}
-                    </VStack>
-                    <Inpuut width={'96'} height={'16'} placeholder='Email'
-                        leftElement={<User size={32} color="black" weight="fill" />}
-                        className="placeholder:font-bold placeholder:text-2xl"
+                    </View>
+                    <Inpuut
+                        widht="24"
+                        className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Email'
                         onChangeText={getEmail}
                     />
-                </VStack>
+                </View>
 
-                <VStack width={'full'} alignItems={'center'} justifyContent={'center'} display={'flex'}>
-                    <VStack className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
+                <View className="w-full px-4 flex items-center justify-center">
+                    <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Senha:</Text>
                         {data.map(e => {
                             if (e.Password != pass) {
@@ -124,32 +110,31 @@ export function Login() {
                                 )
                             }
                         })}
-                    </VStack>
-                    <Inpuut width={'96'} height={'16'} placeholder='Senha'
-                        leftElement={<LockKey size={32} color="black" weight="fill" />}
-                        className="placeholder:font-bold placeholder:text-2xl"
+                    </View>
+                    <Inpuut
+                        widht="24"
+                        className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Senha'
                         onChangeText={getPass}
-                        type="password"
                     />
-                </VStack>
+                </View>
 
-                <VStack className="w-screen flex flex-col items-center justify-center">
+                <View className="w-screen flex flex-col items-center justify-center">
                     <Link className="font-bold text-xl" onPress={LocalAuth}>Não tem conta IBeauty? Clique e crie gratuitamente.</Link>
                     <Link className="font-bold text-xl" onPress={LocalAuth}>Esqueci a senha</Link>
-                </VStack>
+                </View>
 
-                <VStack>
+                <View className="w-full px-4 flex items-center justify-center">
                     <Buttoon
                         tittle="Entrar"
                         color="boldColor"
-                        className="w-96 text-center"
+                        className="w-full bg-[#6A8E86] flex items-center justify-center h-12 rounded-lg"
                         onPress={SetLogin}
                     />
-                </VStack>
-                <VStack className='w-full flex flex-col items-start justify-start'>
+                </View>
+                <View className='w-full px-8 flex flex-col items-start justify-start'>
                     <ButtonBack />
-                </VStack>
-            </VStack>
-        </VStack>
+                </View>
+            </View>
+        </View>
     )
 }
