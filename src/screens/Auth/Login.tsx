@@ -1,4 +1,4 @@
-import { Link, Text } from "native-base";
+import { Button, Link, Text } from "native-base";
 import { Buttoon } from "../../components/Buttons/Button";
 import { Header } from "../../components/header";
 import { Inpuut } from "../../components/Input/input";
@@ -7,7 +7,8 @@ import * as SecureStorage from 'expo-secure-store'
 import { useEffect, useState } from "react";
 import { api } from "../../../lib/axios";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
+import { useAuth } from "../../hooks/useAuth";
 
 interface DataProps {
     Password: string
@@ -30,46 +31,9 @@ export function Login() {
             navigation.navigate('Provider')
         }
     }
+    const { singIn, isUserLoading } = useAuth()
+    console.log("Dados do usuário: ", isUserLoading)
 
-    const [route, setRoute] = useState('')
-    const [email, getEmail] = useState('')
-    const [pass, getPass] = useState('')
-    const [data, getResponseData] = useState<DataProps[]>([])
-
-    useEffect(() => {
-        if (title == "Cliente") {
-            setRoute("client")
-        } else {
-            setRoute('provider')
-        }
-    }, [])
-
-    async function SetLogin() {
-        try {
-            await api.get(`/${route}/${email}`)
-                .then(function (response) {
-                    getResponseData(response.data.userInfo)
-                })
-
-            data.map(async e => {
-                if (title == "Cliente") {
-                    await SecureStorage.setItemAsync('ClientId', e.CPF)
-                    navigation.navigate('change')
-                } else {
-                    await SecureStorage.setItemAsync('ProviderId', e.CNPJ)
-                    navigation.navigate('change', {
-                        providerId: e.CNPJ
-                    })
-                }
-            })
-
-
-        } catch (error) {
-
-            console.error(error)
-            throw error
-        }
-    }
     return (
         <View
             className='bg-white w-full h-full items-center'>
@@ -83,6 +47,11 @@ export function Login() {
                     <Text className="text-LabelColor font-bold text-4xl">Conta IBeauty</Text>
                 </View>
                 <View className="w-full px-4 flex items-center justify-center">
+                    <TouchableOpacity className="w-full h-12 rounded-lg bg-red-500 flex items-center justify-center" onPress={singIn}>
+                        <Text className="text-white text-xl font-bold">Entrar com o Google</Text>
+                    </TouchableOpacity>
+                </View>
+                {/* <View className="w-full px-4 flex items-center justify-center">
                     <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
                         {data.map(e => {
@@ -110,30 +79,29 @@ export function Login() {
                                 )
                             }
                         })}
-                    </View>
-                    <Inpuut
+                    </View> */}
+                {/* <Inpuut
                         widht="24"
                         className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Senha'
                         onChangeText={getPass}
-                    />
-                </View>
+                    /> */}
+            </View>
 
-                <View className="w-screen flex flex-col items-center justify-center">
-                    <Link className="font-bold text-xl" onPress={LocalAuth}>Não tem conta IBeauty? Clique e crie gratuitamente.</Link>
-                    <Link className="font-bold text-xl" onPress={LocalAuth}>Esqueci a senha</Link>
-                </View>
+            <View className="w-screen flex flex-col items-center justify-center">
+                <Link className="font-bold text-xl" onPress={LocalAuth}>Não tem conta IBeauty? Clique e crie gratuitamente.</Link>
+                <Link className="font-bold text-xl" onPress={LocalAuth}>Esqueci a senha</Link>
+            </View>
 
-                <View className="w-full px-4 flex items-center justify-center">
-                    <Buttoon
+            <View className="w-full px-4 flex items-center justify-center">
+                {/* <Buttoon
                         tittle="Entrar"
                         color="boldColor"
                         className="w-full bg-[#6A8E86] flex items-center justify-center h-12 rounded-lg"
                         onPress={SetLogin}
-                    />
-                </View>
-                <View className='w-full px-8 flex flex-col items-start justify-start'>
-                    <ButtonBack />
-                </View>
+                    /> */}
+            </View>
+            <View className='w-full px-8 flex flex-col items-start justify-start'>
+                <ButtonBack />
             </View>
         </View>
     )

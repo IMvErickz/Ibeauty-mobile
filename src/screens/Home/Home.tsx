@@ -12,61 +12,46 @@ export function Home() {
 
     const navigation = useNavigation()
 
-    const [client, setCliente] = useState('')
-    const [provider, setProvider] = useState('')
-
-
-    async function isLogged() {
-        const clienteID = await SecureStore.getItemAsync('ClientId')
-        const providerID = await SecureStore.getItemAsync('ProviderId')
-
-        setCliente(clienteID as string)
-        setProvider(providerID as string)
-    }
-
-    isLogged()
-
     return (
         <>
-            {client || provider ? <TabBar />
-                :
-                <View className="flex-1 flex-col justify-center items-center bg-backGround bg-[url('../../assets/Bolinhas.png')]">
-                    <View className="flex flex-col items-start w-screen p-2">
-                        <Text className="text-boldColor font-bold text-2xl">
-                            Seja Bem vindo ao IBeauty,
-                        </Text>
-                        <Text className='text-boldColor font-semibold text-xl'>
-                            aproveite o app.
-                        </Text>
-                    </View>
-                    <View className="flex flex-col justify-center items-center gap-y-6 w-screen">
-                        <View className='flex flex-col items-start w-screen p-2'>
-                            <Text className='text-[#548075] font-semibold text-lg'>
-                                Selecione a opção que você se encaixe!</Text>
-                        </View>
 
-                        <ButtonHome
-                            tittle='Cliente'
-                            className="bg-boldColor w-80 p-3"
-                            onPressIn={() => {
-                                navigation.navigate('auth', {
-                                    title: 'Cliente'
-                                })
-                            }}
-                        />
-
-                        <ButtonHome
-                            tittle='Profissionais'
-                            className="bg-boldColor w-80 p-3"
-                            onPressIn={() => {
-                                navigation.navigate('auth', {
-                                    title: 'Prestador'
-                                })
-                            }}
-                        />
-                    </View>
+            <View className="flex-1 flex-col justify-center items-center bg-backGround bg-[url('../../assets/Bolinhas.png')]">
+                <View className="flex flex-col items-start w-screen p-2">
+                    <Text className="text-boldColor font-bold text-2xl">
+                        Seja Bem vindo ao IBeauty,
+                    </Text>
+                    <Text className='text-boldColor font-semibold text-xl'>
+                        aproveite o app.
+                    </Text>
                 </View>
-            }
+                <View className="flex flex-col justify-center items-center gap-y-6 w-screen">
+                    <View className='flex flex-col items-start w-screen p-2'>
+                        <Text className='text-[#548075] font-semibold text-lg'>
+                            Selecione a opção que você se encaixe!</Text>
+                    </View>
+
+                    <ButtonHome
+                        tittle='Cliente'
+                        className="bg-boldColor w-80 p-3"
+                        onPressIn={() => {
+                            navigation.navigate('auth', {
+                                title: 'Cliente'
+                            })
+                        }}
+                    />
+
+                    <ButtonHome
+                        tittle='Profissionais'
+                        className="bg-boldColor w-80 p-3"
+                        onPressIn={() => {
+                            navigation.navigate('auth', {
+                                title: 'Prestador'
+                            })
+                        }}
+                    />
+                </View>
+            </View>
+
         </>
 
     )
