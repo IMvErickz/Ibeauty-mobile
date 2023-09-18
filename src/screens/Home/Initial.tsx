@@ -2,7 +2,7 @@ import { Image, Text, Button } from "native-base";
 import { useEffect, useState, useMemo } from "react";
 import { api } from "../../../lib/axios";
 import { CardInitial } from "../../components/Cards/cardInitial";
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 import { Header } from "../../components/header";
 import { Buttoon } from "../../components/Buttons/Button";
@@ -38,6 +38,9 @@ export function Initial() {
     const [ServicesData, setDataService] = useState<ProductsProps[]>([])
     const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
     const [drawer, setDrawer] = useState('none')
+
+    const { params } = useRoute()
+    const { userId }: any = params
 
     function openSideBar() {
         setDrawer('flex')

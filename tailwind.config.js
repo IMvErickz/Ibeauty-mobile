@@ -15,7 +15,12 @@ module.exports = {
         'bgLight': '#E5E5E5',
         'borderColor': '#D9D9D9',
         'LabelColor': '#416058',
-        'red-20': "#D14747A3"
+        'red-20': "#D14747A3",
+
+        gray: {
+          250: '#F1F1F1',
+          750: '#4D4D4D'
+        }
       }
     },
   },

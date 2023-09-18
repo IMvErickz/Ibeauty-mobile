@@ -43,38 +43,43 @@ export function Client() {
     return (
         <FormControl>
             <ScrollView>
-                <View className="w-full h-full flex items-center justify-centerbg-white">
+                <View className="flex items-center justify-center bg-white">
                     <View className='w-full flex items-center justify-center'>
                         <Header
                             text='Novo Cliente'
                         />
                     </View>
-                    <View className=' w-full flex flex-col items-start justify-start'>
+                    <View className=' w-full flex flex-col items-start justify-start py-4 px-2'>
                         <Text className='text-black font-semibold text-4xl'>Seus Dados</Text>
                     </View>
-                    <View className='w-60 flex flex-row items-center justify-center p-5'>
+                    <View className='w-60 flex flex-row items-center justify-center space-x-6 py-5 px-4'>
                         <Inpuut
                             widht='190'
                             placeholder='Nome'
                             onChangeText={setName}
+                            className='bg-gray-250 w-[80%] h-12 rounded-lg'
                         />
 
                         <Inpuut
                             widht='190'
+                            className='bg-gray-250 w-[80%] h-12 rounded-lg'
+                            placeholder='Sobrenome'
                         />
                     </View>
 
-                    <View className='w-60 flex flex-row items-center justify-center p-5'>
+                    <View className='w-60 flex flex-row items-center justify-center space-x-6 py-5 px-4'>
                         <Inpuut
                             widht='190'
                             placeholder='Telefone (opcional)'
                             onChangeText={setcellNumber}
+                            className='bg-gray-250 w-[80%] h-12 rounded-lg'
                         />
 
                         <Inpuut
                             widht='190'
                             placeholder='Data de nascimento'
                             onChangeText={setDate}
+                            className='bg-gray-250 w-[80%] h-12 rounded-lg'
                         />
                     </View>
 
@@ -82,21 +87,27 @@ export function Client() {
                         <Text className='text-black font-semibold text-4xl'>Dados de Login</Text>
                     </View>
 
-                    <View className='flex flex-col items-center justify-center w-full'>
+                    <View className='flex flex-col items-center justify-center w-full px-5 py-4'>
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">CPF</Text>
                         </View>
-                        <Inpuut widht='381' onChangeText={setCPF} />
+                        <Inpuut widht='381' onChangeText={setCPF}
+                            className='bg-gray-250 w-full h-12 rounded-lg p-2'
+                        />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Email</Text>
                         </View>
-                        <Inpuut widht='381' onChangeText={setEmail} />
+                        <Inpuut widht='381' onChangeText={setEmail}
+                            className='bg-gray-250 w-full h-12 rounded-lg p-2'
+                        />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Confirme seu Email</Text>
                         </View>
-                        <Inpuut widht='381' />
+                        <Inpuut widht='381'
+                            className='bg-gray-250 w-full h-12 rounded-lg p-2'
+                        />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Senha</Text>
@@ -104,6 +115,7 @@ export function Client() {
                         <Inpuut widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             onChangeText={setPassword}
+                            className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />
 
                         <View className='w-full flex flex-col items-start justify-start'>
@@ -111,6 +123,7 @@ export function Client() {
                         </View>
                         <Inpuut widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
+                            className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />
 
                         <View className='w-full flex flex-row items-start justify-start'>
@@ -130,7 +143,7 @@ export function Client() {
 
                         <Buttoon
                             tittle='Finalizar Cadastro'
-                            color='#4D4D4D'
+                            className='bg-gray-750 w-full flex items-center justify-center h-12 rounded-lg'
                             onPress={Register}
                         />
                     </View>

@@ -9,6 +9,7 @@ import { api } from "../../../lib/axios";
 import { ButtonBack } from "../../components/Buttons/buttonBack";
 import { TouchableOpacity, View } from 'react-native'
 import { useAuth } from "../../hooks/useAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface DataProps {
     Password: string
@@ -17,6 +18,9 @@ interface DataProps {
 }
 
 export function Login() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const { params } = useRoute()
 
@@ -33,6 +37,19 @@ export function Login() {
     }
     const { singIn, isUserLoading } = useAuth()
     console.log("Dados do usuário: ", isUserLoading)
+
+    async function handleSingIn() {
+        await api.post(`/login/${title}`, {
+            email,
+            password
+        }).then(function (response) {
+            navigation.navigate('change', {
+                userId: response.data.user.id
+            })
+
+            AsyncStorage.setItem('userId', response.data.user.id)
+        })
+    }
 
     return (
         <View
@@ -51,57 +68,44 @@ export function Login() {
                         <Text className="text-white text-xl font-bold">Entrar com o Google</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <View className="w-full px-4 flex items-center justify-center">
+                <View className="w-full px-4 flex items-center justify-center">
                     <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
-                        {data.map(e => {
-                            if (e.Password != pass) {
-                                return (
-                                    <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
-                                )
-                            }
-                        })}
                     </View>
                     <Inpuut
                         widht="24"
                         className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Email'
-                        onChangeText={getEmail}
+                        onChangeText={setEmail}
                     />
                 </View>
 
                 <View className="w-full px-4 flex items-center justify-center">
                     <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                         <Text className="text-LabelColor text-xl font-semibold">Senha:</Text>
-                        {data.map(e => {
-                            if (e.Password != pass) {
-                                return (
-                                    <Text className="text-red-600 text-xl font-semibold">Email ou senha incorretos</Text>
-                                )
-                            }
-                        })}
-                    </View> */}
-                {/* <Inpuut
+                    </View>
+                    <Inpuut
                         widht="24"
                         className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Senha'
-                        onChangeText={getPass}
-                    /> */}
-            </View>
+                        onChangeText={setPassword}
+                    />
+                </View>
 
-            <View className="w-screen flex flex-col items-center justify-center">
-                <Link className="font-bold text-xl" onPress={LocalAuth}>Não tem conta IBeauty? Clique e crie gratuitamente.</Link>
-                <Link className="font-bold text-xl" onPress={LocalAuth}>Esqueci a senha</Link>
-            </View>
+                <View className="w-screen flex flex-col items-center justify-center">
+                    <Link className="font-bold text-xl" onPress={LocalAuth}>Não tem conta IBeauty? Clique e crie gratuitamente.</Link>
+                    <Link className="font-bold text-xl" onPress={LocalAuth}>Esqueci a senha</Link>
+                </View>
 
-            <View className="w-full px-4 flex items-center justify-center">
-                {/* <Buttoon
+                <View className="w-full px-4 flex items-center justify-center">
+                    <Buttoon
                         tittle="Entrar"
                         color="boldColor"
                         className="w-full bg-[#6A8E86] flex items-center justify-center h-12 rounded-lg"
-                        onPress={SetLogin}
-                    /> */}
-            </View>
-            <View className='w-full px-8 flex flex-col items-start justify-start'>
-                <ButtonBack />
+                        onPress={handleSingIn}
+                    />
+                </View>
+                <View className='w-full px-8 flex flex-col items-start justify-start'>
+                    <ButtonBack />
+                </View>
             </View>
         </View>
     )
