@@ -24,7 +24,7 @@ export default function Layout() {
                     <Stack.Screen name="schedule/hour" />
                     <Stack.Screen name="schedule/index" />
                     <Stack.Screen name="product/register" />
-                    <Stack.Screen name="payment" />
+                    <Stack.Screen name="payment/index" />
                 </Stack>
             </NativeBaseProvider>
         </>
