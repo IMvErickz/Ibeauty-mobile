@@ -1,9 +1,8 @@
 import { FormControl, Select, CheckIcon } from "native-base";
-import { Header } from "../../components/header";
-import { Inpuut } from "../../components/Input/input";
-import { ButtonBack } from "../../components/Buttons/buttonBack";
+import { Header } from "../../../components/header";
+import { Inpuut } from "../../../components/Input/input";
 import * as ImagePicker from 'expo-image-picker';
-import { api } from "../../../lib/axios";
+import { api } from "../../../../lib/axios";
 import { useState } from "react";
 import { useQuery } from 'react-query'
 import { useNavigation } from "@react-navigation/native";
@@ -16,7 +15,7 @@ interface SelectionProps {
     id: string
 }
 
-export function NewProduct() {
+export default function NewProduct() {
 
     const [preview, setPreview] = useState('')
 
@@ -108,7 +107,6 @@ export function NewProduct() {
                     <View className="w-full flex items-center justify-center">
                         <Header
                             text="Novo Produto"
-                            ButtonBack={<ButtonBack />}
                         />
                     </View>
                     <View className='w-full flex flex-col items-start justify-start ml-8 py-8'>

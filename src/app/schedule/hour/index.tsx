@@ -1,5 +1,4 @@
-import { Header } from "../../components/header";
-import { ButtonBack } from "../../components/Buttons/buttonBack";
+import { Header } from "../../../components/header";
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 
 export function Hours() {
@@ -8,7 +7,6 @@ export function Hours() {
             <View className="w-full h-full flex items-center justify-center">
                 <View className="w-full flex flex-col items-center justify-center">
                     <Header
-                        ButtonBack={<ButtonBack />}
                     />
                 </View>
                 <View className='w-full flex flex-col items-center justify-center gap-y-8'>

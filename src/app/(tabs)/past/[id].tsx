@@ -1,10 +1,10 @@
-import { Header } from "../../components/header";
-import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
-import { Payments } from "../../components/payment/Payments";
 import { Money } from "phosphor-react-native";
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { Header } from "../../../components/header";
+import { CardProducts } from "../../../components/Cards/cardProductsServices.tsx";
+import { Payments } from "../../../components/payment/Payments";
 
-export function PastService() {
+export default function PastService() {
 
     return (
         <ScrollView className='w-full h-full bg-white'>

@@ -1,15 +1,15 @@
 import { FormControl, Checkbox } from 'native-base'
-import { Buttoon } from '../../components/Buttons/Button'
-import { Header } from '../../components/header'
-import { Inpuut } from '../../components/Input/input'
-import { Eye } from 'phosphor-react-native'
-import { ButtonBack } from '../../components/Buttons/buttonBack'
+import { Buttoon } from '../../../components/Buttons/Button'
+import { Header } from '../../../components/header'
+import { Inpuut } from '../../../components/Input/input'
+import { ArrowFatLeft, Eye } from 'phosphor-react-native'
 import { useState } from 'react'
-import { api } from '../../../lib/axios'
 import { useNavigation } from '@react-navigation/native'
 import { View, Text, ScrollView } from 'react-native'
+import { api } from '../../../../lib/axios'
+import { Link } from 'expo-router'
 
-export function Client() {
+export default function Client() {
 
     const navigation = useNavigation()
 
@@ -30,11 +30,10 @@ export function Client() {
                 Password,
                 cellNumber,
                 dateBirth,
+                img: '',
                 cep: "12922-341",
                 number: "669"
             })
-
-            navigation.navigate('auth')
         } catch (error) {
             console.log(error)
             throw error
@@ -149,7 +148,9 @@ export function Client() {
                     </View>
 
                     <View className='w-full flex flex-col items-start justify-start'>
-                        <ButtonBack />
+                        <Link href={'/'}>
+                            <ArrowFatLeft size={32} color="#6A8E86" weight="fill" />
+                        </Link>
                     </View>
                 </View>
             </ScrollView>

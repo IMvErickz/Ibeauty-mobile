@@ -1,17 +1,16 @@
 import { FormControl, Checkbox, Select, CheckIcon } from "native-base";
 import { FormEvent, useState, } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
-import { api } from "../../../lib/axios";
-import { Buttoon } from "../../components/Buttons/Button";
-import { Header } from "../../components/header";
-import { Inpuut } from "../../components/Input/input";
-import { Selection } from "../../components/Select";
 import { ArrowFatLeft, Eye, IconProps } from "phosphor-react-native";
 import { useNavigation } from '@react-navigation/native'
-import { ButtonBack } from "../../components/Buttons/buttonBack";
 import * as ImagePicker from 'expo-image-picker'
+import { api } from "../../../../lib/axios";
+import { Header } from "../../../components/header";
+import { Inpuut } from "../../../components/Input/input";
+import { Buttoon } from "../../../components/Buttons/Button";
+import { Link } from "expo-router";
 
-export function Provider() {
+export default function Provider() {
 
     const navigation = useNavigation()
 
@@ -211,7 +210,9 @@ export function Provider() {
                     </View>
 
                     <View className="w-full flex flex-col items-start justify-start p-4">
-                        <ButtonBack />
+                        <Link href={'/'}>
+                            <ArrowFatLeft size={32} color="#6A8E86" weight="fill" />
+                        </Link>
                     </View>
                 </View>
             </ScrollView>

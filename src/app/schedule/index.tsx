@@ -1,5 +1,4 @@
 import { Header } from "../../components/header";
-import { ButtonBack } from "../../components/Buttons/buttonBack";
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleDay } from "../../components/Schedule/scheduleDay";
 import { api } from "../../../lib/axios";
@@ -46,7 +45,7 @@ export function Schedule() {
             <View className="w-full h-full flex items-center justify-center">
                 <View className='w-full flex flex-col items-center justify-center'>
                     <Header
-                        ButtonBack={<ButtonBack />}
+
                     />
                 </View>
                 <View className='w-full flex items-start p-2'>

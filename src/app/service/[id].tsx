@@ -1,9 +1,10 @@
 import { Header } from "../../components/header";
 import { CardProducts } from "../../components/Cards/cardProductsServices.tsx";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "../../../lib/axios";
 import { View, Text, ScrollView, Image } from 'react-native'
+import { useLocalSearchParams } from "expo-router";
 
 interface SericoProps {
     NameService: string
@@ -18,25 +19,24 @@ interface ServiceProps {
     img: string
 }
 
-export function Store() {
+export default function Store() {
 
-    const [id, setName] = useState('')
-    async function StoreServices() {
-        let idStore = await AsyncStorage.getItem('Storeid')
-        setName(idStore as string)
-        //console.log(name)
-    }
+    const localParam = useLocalSearchParams()
 
-    StoreServices()
+    const { id } = localParam
 
     const [data, setData] = useState<ServiceProps[]>([])
 
-    const memory = useMemo(async () => {
-        await api.get(`/services/${id}`)
-            .then(function (response) {
-                setData(response.data.services)
-            })
-    }, [id])
+    useEffect(() => {
+        async function getServices() {
+            await api.get(`/services/${id}`)
+                .then(function (response) {
+                    setData(response.data.services)
+                })
+        }
+        getServices()
+
+    }, [])
 
     return (
         <ScrollView className="bg-white">
@@ -48,7 +48,11 @@ export function Store() {
                     return (
                         <><View className='w-full flex flex-row items-center justify-center gap-x-16' key={e.Name}>
                             <Image source={{ uri: e.img }}
-                                className="rounded-full static w-5" />
+                                className="rounded-full static"
+                                width={80}
+                                height={80}
+                                key={e.Name}
+                            />
                             <Text className="font-bold text-xl">{e.Name}</Text>
                         </View>
                             <View className="w-full flex flex-col items-center justify-center">
@@ -59,6 +63,7 @@ export function Store() {
                                             Name={e.NameService}
                                             img={e.img}
                                             Price={e.price}
+                                            key={e.id}
                                         />
                                     )
                                 })}

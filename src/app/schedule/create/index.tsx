@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
-import { Header } from "../../components/header";
+import { Header } from "../../../components/header";
 import { Checkbox } from "native-base";
 import { useState } from "react";
 
-export function CreateSchedule() {
+export default function CreateSchedule() {
 
     const [change, setChange] = useState('')
 
