@@ -11,7 +11,7 @@ export interface HeaderProps {
 
 export function Header(props: HeaderProps) {
     return (
-        <View className='w-full flex flex-col items-start justify-start bg-backGround py-10'>
+        <View className='w-full flex flex-col items-start px-4 justify-start bg-backGround py-10'>
             <Text className='text-boldColor font-extrabold text-6xl'>
                 {props.text}
             </Text>

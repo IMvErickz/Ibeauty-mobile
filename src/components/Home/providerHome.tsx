@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Image } from "react-native"
+import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native"
 import { Header } from "../header"
 import { List } from "phosphor-react-native"
 import { Button } from "native-base"
@@ -9,6 +9,7 @@ import { CardProducts } from "../Cards/cardProductsServices.tsx"
 import { Buttoon } from "../Buttons/Button"
 import * as SecureStorage from 'expo-secure-store'
 import { api } from "../../../lib/axios"
+import { Link } from "expo-router"
 
 interface SericoProps {
     NameService: string
@@ -29,7 +30,7 @@ export function ProviderHome() {
 
     const [providerID, getProviderID] = useState('')
     async function StoreServices() {
-        const id = await SecureStorage.getItemAsync('ProviderId')
+        const id = await SecureStorage.getItemAsync('userId')
         getProviderID(id as string)
         //console.log(name)
     }
@@ -61,7 +62,10 @@ export function ProviderHome() {
                                 <Text className="font-bold text-xl">{e.Name}</Text>
                                 <Image source={{ uri: e.img }}
                                     alt="Imagem não encontrada"
-                                    className="rounded-full static" />
+                                    className="rounded-full static"
+                                    width={80}
+                                    height={80}
+                                />
                             </View><View className="w-full flex flex-col items-center justify-center">
                                     {e.Service.map(service => {
                                         return (
@@ -75,7 +79,13 @@ export function ProviderHome() {
                                         )
                                     })}
                                     <View className="w-full flex items-center justify-center px-4 py-2">
-                                        <Buttoon tittle="Adcionar novo serviço" className="bg-boldColor w-full h-16 flex rounded-lg items-center justify-center" />
+
+                                        <Link href={'/product/register'} asChild>
+                                            <TouchableOpacity className=" bg-boldColor w-full h-16 flex items-center justify-center rounded-lg">
+                                                <Text className="text-white text-2xl font-semibold">Adicionar Novo Serviço</Text>
+                                            </TouchableOpacity>
+                                        </Link>
+
                                     </View>
                                 </View></>
                         )

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../../lib/axios";
 import { TouchableOpacity, View } from 'react-native'
 import { useAuth } from "../../hooks/useAuth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStorage from 'expo-secure-store'
 import { ArrowFatLeft } from "phosphor-react-native";
 import { Link, useLocalSearchParams, router } from "expo-router";
 
@@ -42,7 +42,7 @@ export default function Login() {
             email,
             password
         }).then(function (response) {
-            AsyncStorage.setItem('userId', response.data.user.id)
+            SecureStorage.setItemAsync('userId', response.data.user.id)
             router.push(`/home/${title}`)
 
         })

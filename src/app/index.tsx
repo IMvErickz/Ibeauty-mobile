@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { Link } from 'expo-router';
 
 
@@ -21,12 +21,16 @@ export default function Home() {
                             Selecione a opção que você se encaixe!
                         </Text>
                     </View>
-                    <Link href={`/login/Cliente`} className="bg-boldColor rounded-lg flex w-80 p-3 items-center justify-center">
-                        <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>Cliente</Text>
+                    <Link href={`/login/Cliente`} asChild className="bg-boldColor rounded-lg flex w-80 p-3 items-center justify-center">
+                        <TouchableOpacity className='flex items-center justify-center'>
+                            <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>Cliente</Text>
+                        </TouchableOpacity>
                     </Link>
 
-                    <Link href={`/login/Profissional`} className="bg-boldColor rounded-lg flex w-80 p-3 items-center justify-center">
-                        <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>Profissional</Text>
+                    <Link href={`/login/Profissional`} asChild className="bg-boldColor rounded-lg flex w-80 p-3 items-center justify-center">
+                        <TouchableOpacity className='flex items-center justify-center'>
+                            <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>Profissional</Text>
+                        </TouchableOpacity>
                     </Link>
                 </View>
             </View>

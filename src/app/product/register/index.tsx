@@ -3,8 +3,7 @@ import { Header } from "../../../components/header";
 import { Inpuut } from "../../../components/Input/input";
 import * as ImagePicker from 'expo-image-picker';
 import { api } from "../../../../lib/axios";
-import { useState } from "react";
-import { useQuery } from 'react-query'
+import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStorage from 'expo-secure-store'
 import { View, TouchableOpacity, Text, ScrollView, Image } from 'react-native'
@@ -18,6 +17,11 @@ interface SelectionProps {
 export default function NewProduct() {
 
     const [preview, setPreview] = useState('')
+    const [data, setData] = useState<SelectionProps[]>([])
+    const [NameService, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [description, setDesc] = useState('')
+    const [category, getCategory] = useState('')
 
     console.log("URL PREVIEW: ", preview)
 
@@ -41,20 +45,20 @@ export default function NewProduct() {
     const [id, getId] = useState('')
     console.log(id)
     async function StoreServices() {
-        let nameLocal = await SecureStorage.getItemAsync('ProviderId')
+        let nameLocal = await SecureStorage.getItemAsync('userId')
         getId(nameLocal as string)
     }
 
-    const { data } = useQuery<SelectionProps[]>('Category', async () => {
-        const response = await api.get('/categorys')
+    useEffect(() => {
+        async function GetData() {
+            await api.get('/categorys')
+                .then(response => {
+                    setData(response.data.getCategory)
+                })
+        }
+        GetData()
+    }, [])
 
-        return response.data.getCategory
-    })
-
-    const [NameService, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [description, setDesc] = useState('')
-    const [category, getCategory] = useState('')
 
     async function ProductOrService() {
 
@@ -86,9 +90,9 @@ export default function NewProduct() {
                 NameService,
                 price,
                 description,
-                img: coverUrl,
+                img: coverUrl ? coverUrl : 'https://i.pinimg.com/736x/85/4f/68/854f68f5e247b7f10f1cee121b7ca1aa.jpg',
                 category,
-                CNPJ: id
+                id
             })
 
             navigation.goBack()
@@ -125,9 +129,11 @@ export default function NewProduct() {
                     <View className='w-full flex flex-row items-center justify-center py-12 gap-x-4'>
                         <Image
                             source={{
-                                uri: preview
+                                uri: preview ? preview : 'https://i.pinimg.com/736x/85/4f/68/854f68f5e247b7f10f1cee121b7ca1aa.jpg'
                             }}
-                            className="w-6"
+
+                            width={100}
+                            height={100}
                         />
 
                         <TouchableOpacity onPress={openImagePicker} className='w-44 flex items-center rounded-lg justify-center bg-boldColor'><Text className='font-bold text-center text-lg text-white'>Trocar foto do serviço</Text></TouchableOpacity>
@@ -169,7 +175,7 @@ export default function NewProduct() {
                                         bg: "teal.600",
                                         endIcon: <CheckIcon size={8} />
                                     }} mt="1" onValueChange={(itemValue: any) => getCategory(itemValue)}>
-                                    {data?.map(e => {
+                                    {data.map(e => {
                                         return (
                                             <Select.Item label={e.NameCategory} value={e.id} />
                                         )
