@@ -2,6 +2,7 @@ import { Image, Text, Button } from "native-base";
 import { useEffect, useState, useMemo } from "react";
 import { api } from "../../../lib/axios";
 import { CardInitial } from "../Cards/cardInitial";
+import { Divider } from 'native-base';
 
 import { Header } from "../header";
 import { Buttoon } from "../Buttons/Button";
@@ -53,16 +54,23 @@ export function ClientHome() {
                 <View className="w-full">
                     <Drawer open={drawer} />
                 </View>
-                <View className='w-full flex items-center justify-center flex-col py-8 bg-white'>
+                <View className='w-full flex items-center justify-center flex-col py-8 bg-white px-4'>
+                    <Divider my="1" color={'#D9D9D9'} />
+
                     {ServicesData.map(e => {
                         return (
-                            <CardInitial
-                                CNPJ={e.CNPJ}
-                                Name={e.Name}
-                                img={e.img}
-                                key={e.CNPJ}
-                                id={e.id}
-                            />
+                            <>
+                                <CardInitial
+                                    CNPJ={e.CNPJ}
+                                    Name={e.Name}
+                                    img={e.img}
+                                    key={e.CNPJ}
+                                    id={e.id}
+                                />
+                                <Divider my="1" color={'#D9D9D9'} />
+
+                            </>
+
                         )
                     })}
                 </View>

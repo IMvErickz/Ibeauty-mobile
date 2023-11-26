@@ -1,7 +1,7 @@
 import { Header } from "../../../components/header";
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 
-export function Hours() {
+export default function Hours() {
     return (
         <ScrollView >
             <View className="w-full h-full flex items-center justify-center">

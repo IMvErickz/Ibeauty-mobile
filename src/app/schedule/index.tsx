@@ -17,7 +17,7 @@ interface scheduleProps {
     ScheduleDay: daysProps[]
 }
 
-export function Schedule() {
+export default function Schedule() {
 
     const [id, getId] = useState('')
 

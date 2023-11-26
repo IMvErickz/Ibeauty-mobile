@@ -2,7 +2,7 @@ import { Header } from "../../components/header";
 import { Buttons } from "../../components/payment/Button";
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 
-export function Payment() {
+export default function Payment() {
 
 
     return (

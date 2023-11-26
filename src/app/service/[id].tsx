@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "../../../lib/axios";
 import { View, Text, ScrollView, Image } from 'react-native'
 import { useLocalSearchParams } from "expo-router";
+import { Divider } from "native-base";
 
 interface SericoProps {
     NameService: string
@@ -56,15 +57,19 @@ export default function Store() {
                             <Text className="font-bold text-xl">{e.Name}</Text>
                         </View>
                             <View className="w-full flex flex-col items-center justify-center">
+                                <Divider my='1' color={'#D9D9D9'} />
                                 {e.Service.map(e => {
                                     return (
-                                        <CardProducts
-                                            id={e.id}
-                                            Name={e.NameService}
-                                            img={e.img}
-                                            Price={e.price}
-                                            key={e.id}
-                                        />
+                                        <>
+                                            <CardProducts
+                                                id={e.id}
+                                                Name={e.NameService}
+                                                img={e.img}
+                                                Price={e.price}
+                                                key={e.id}
+                                            />
+                                            <Divider my='1' color={'#D9D9D9'} />
+                                        </>
                                     )
                                 })}
                             </View></>

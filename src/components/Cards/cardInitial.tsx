@@ -14,7 +14,7 @@ interface CardProps {
 export function CardInitial(props: CardProps) {
     return (
 
-        <View className="w-full h-28 flex px-4 flex-row items-center justify-start border-borderColor border-t-2 border-b-2 border-solid gap-x-2">
+        <View className="w-full h-28 flex px-4 flex-row items-center justify-start gap-x-2">
 
             <Image
                 source={{ uri: 'https://s2.glbimg.com/Ha2q-YYa3pCWtwM4E51zi_p-POI=/940x523/e.glbimg.com/og/ed/f/original/2019/02/20/blow-dry-bar-del-mar-chairs-counter-853427.jpg' }}

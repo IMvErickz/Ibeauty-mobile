@@ -25,7 +25,7 @@ export function CardProducts({ Name, img, id, Price, ...rest }: CardProps) {
 
     return (
         <TouchableOpacity className="w-full bg-white border-none" onPress={setIdService}>
-            <View className="w-full h-28 flex flex-row items-center justify-start border-borderColor border-t-2 border-b-2 border-solid space-x-8">
+            <View className="w-full h-28 flex flex-row items-center justify-start space-x-8">
                 <Image
                     source={{ uri: img }}
                     className="rounded-full w-20 h-20"

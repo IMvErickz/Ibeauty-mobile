@@ -16,14 +16,15 @@ export default function Layout() {
                     },
                     animation: 'fade_from_bottom',
                 }} >
-                    <Stack.Screen name="register/client" />
-                    <Stack.Screen name="register/provider" />
-                    <Stack.Screen name="login/:title" />
+                    <Stack.Screen name="register/client/index" />
+                    <Stack.Screen name="register/provider/index" />
+                    <Stack.Screen name="login/[title]" />
                     <Stack.Screen name="(tabs)" />
-                    <Stack.Screen name="schedule/create" />
-                    <Stack.Screen name="schedule/hour" />
+                    <Stack.Screen name="(drawer)" />
+                    <Stack.Screen name="schedule/create/index" />
+                    <Stack.Screen name="schedule/hour/index" />
                     <Stack.Screen name="schedule/index" />
-                    <Stack.Screen name="product/register" />
+                    <Stack.Screen name="product/register/index" />
                     <Stack.Screen name="payment/index" />
                 </Stack>
             </NativeBaseProvider>
