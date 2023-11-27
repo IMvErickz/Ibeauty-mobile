@@ -4,7 +4,7 @@ import { List } from "phosphor-react-native"
 import { Button, Divider } from "native-base"
 import { Drawer } from "../Drawer"
 import { CardInitial } from "../Cards/cardInitial"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { CardProducts } from "../Cards/cardProductsServices.tsx"
 import { Buttoon } from "../Buttons/Button"
 import * as SecureStorage from 'expo-secure-store'
@@ -29,13 +29,15 @@ export function ProviderHome() {
     const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
 
     const [providerID, getProviderID] = useState('')
-    async function StoreServices() {
-        const id = await SecureStorage.getItemAsync('userId')
-        getProviderID(id as string)
-        //console.log(name)
-    }
 
-    StoreServices()
+    useEffect(() => {
+        async function StoreServices() {
+            const id = await SecureStorage.getItemAsync('userId')
+            getProviderID(id as string)
+        }
+
+        StoreServices()
+    }, [])
 
     const providerDataMemory = useMemo(async () => {
         await api.get(`/services/${providerID}`)
@@ -84,11 +86,16 @@ export function ProviderHome() {
                                             </>
                                         )
                                     })}
-                                    <View className="w-full flex items-center justify-center px-4 py-2">
+                                    <View className="w-full flex items-center justify-center space-y-4 px-4 py-2">
 
                                         <Link href={'/product/register'} asChild>
                                             <TouchableOpacity className=" bg-boldColor w-full h-16 flex items-center justify-center rounded-lg">
                                                 <Text className="text-white text-2xl font-semibold">Adicionar Novo Serviço</Text>
+                                            </TouchableOpacity>
+                                        </Link>
+                                        <Link href={'/schedule/create'} asChild>
+                                            <TouchableOpacity className=" bg-boldColor w-full h-16 flex items-center justify-center rounded-lg">
+                                                <Text className="text-white text-2xl font-semibold">Editar Agenda</Text>
                                             </TouchableOpacity>
                                         </Link>
 
