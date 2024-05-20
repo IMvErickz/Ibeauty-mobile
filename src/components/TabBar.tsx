@@ -1,17 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MapPin, Notepad, Storefront, CalendarBlank } from "phosphor-react-native"
 //import LocalIncon from "../styles/LocalIncon"
-import { Initial } from "../screens/Home/Initial"
-import { Store } from "../screens/Services/storeInfo"
 import { useState } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import Initial from "../app/(tabs)/home/[tittle]"
+import Store from "../app/service/[id]"
 
 export function TabBar() {
     const { Navigator, Screen } = createBottomTabNavigator()
 
     const [localType, setLocalType] = useState('')
-
-    console.log(localType)
 
     async function setButtonsIcon() {
         const local = await AsyncStorage.getItem('LocalAuth')

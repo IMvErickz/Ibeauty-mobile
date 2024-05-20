@@ -1,7 +1,7 @@
 import { ScrollView, Text } from "native-base";
 import { Buttoon } from "../../components/Buttons/Button";
 import { Header } from "../../components/header";
-import { Inpuut } from "../../components/Input/input";
+import { Input } from "../../components/Input/input";
 import { useEffect, useState } from "react";
 import { api } from "../../../lib/axios";
 import { TouchableOpacity, View } from 'react-native'
@@ -35,7 +35,6 @@ export default function Login() {
     }, [])
 
     const { singIn, isUserLoading } = useAuth()
-    console.log("Dados do usuário: ", isUserLoading)
 
     async function handleSingIn() {
         await api.post(`/login/${title}`, {
@@ -70,7 +69,7 @@ export default function Login() {
                         <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                             <Text className="text-LabelColor text-xl font-semibold">Email:</Text>
                         </View>
-                        <Inpuut
+                        <Input
                             widht="24"
                             className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Email'
                             onChangeText={setEmail}
@@ -81,7 +80,7 @@ export default function Login() {
                         <View className="w-full flex flex-row items-start justify-start ml-4 gap-x-2">
                             <Text className="text-LabelColor text-xl font-semibold">Senha:</Text>
                         </View>
-                        <Inpuut
+                        <Input
                             widht="24"
                             className='w-full h-12 rounded-lg p-2 bg-[#F1F1F1] placeholder:font-bold placeholder:text-2xl' placeholder='Senha'
                             onChangeText={setPassword}

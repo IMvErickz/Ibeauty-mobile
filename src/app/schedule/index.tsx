@@ -36,8 +36,6 @@ export default function Schedule() {
             })
     }, [])
 
-    data?.map(e => e.ScheduleDay.map(e => console.log(e.day, e.id)))
-
     const navigation = useNavigation()
 
     return (

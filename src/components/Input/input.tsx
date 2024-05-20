@@ -7,7 +7,7 @@ interface InputProps extends Readonly<TextInputProps> {
     widht?: string
 }
 
-export function Inpuut({ placeholder, RightIcon, LeftIcon, widht, ...rest }: InputProps) {
+export function Input({ placeholder, RightIcon, LeftIcon, widht, ...rest }: InputProps) {
     return (
         <TextInput
             placeholder={placeholder}

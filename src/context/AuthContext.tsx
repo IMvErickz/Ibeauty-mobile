@@ -44,7 +44,6 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
             await promptAsync()
         } catch (error) {
-            console.log(error)
             throw error
         } finally {
             setUserLoading(false)
@@ -62,7 +61,6 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
             setUser(userInfoResponse.data)
 
         } catch (error) {
-            console.log(error)
             throw error
         } finally {
             setUserLoading(false)

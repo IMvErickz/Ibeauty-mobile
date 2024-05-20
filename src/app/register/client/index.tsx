@@ -1,7 +1,7 @@
 import { FormControl, Checkbox } from 'native-base'
 import { Buttoon } from '../../../components/Buttons/Button'
 import { Header } from '../../../components/header'
-import { Inpuut } from '../../../components/Input/input'
+import { Input } from '../../../components/Input/input'
 import { ArrowFatLeft, Eye } from 'phosphor-react-native'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
@@ -35,7 +35,6 @@ export default function Client() {
                 number: "669"
             })
         } catch (error) {
-            console.log(error)
             throw error
         }
     }
@@ -52,14 +51,14 @@ export default function Client() {
                         <Text className='text-black font-semibold text-4xl'>Seus Dados</Text>
                     </View>
                     <View className='w-60 flex flex-row items-center justify-center space-x-6 py-5 px-4'>
-                        <Inpuut
+                        <Input
                             widht='190'
                             placeholder='Nome'
                             onChangeText={setName}
                             className='bg-gray-250 w-[80%] h-12 rounded-lg'
                         />
 
-                        <Inpuut
+                        <Input
                             widht='190'
                             className='bg-gray-250 w-[80%] h-12 rounded-lg'
                             placeholder='Sobrenome'
@@ -67,14 +66,14 @@ export default function Client() {
                     </View>
 
                     <View className='w-60 flex flex-row items-center justify-center space-x-6 py-5 px-4'>
-                        <Inpuut
+                        <Input
                             widht='190'
                             placeholder='Telefone (opcional)'
                             onChangeText={setcellNumber}
                             className='bg-gray-250 w-[80%] h-12 rounded-lg'
                         />
 
-                        <Inpuut
+                        <Input
                             widht='190'
                             placeholder='Data de nascimento'
                             onChangeText={setDate}
@@ -90,28 +89,28 @@ export default function Client() {
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">CPF</Text>
                         </View>
-                        <Inpuut widht='381' onChangeText={setCPF}
+                        <Input widht='381' onChangeText={setCPF}
                             className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Email</Text>
                         </View>
-                        <Inpuut widht='381' onChangeText={setEmail}
+                        <Input widht='381' onChangeText={setEmail}
                             className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Confirme seu Email</Text>
                         </View>
-                        <Inpuut widht='381'
+                        <Input widht='381'
                             className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />
 
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Senha</Text>
                         </View>
-                        <Inpuut widht='381'
+                        <Input widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             onChangeText={setPassword}
                             className='bg-gray-250 w-full h-12 rounded-lg p-2'
@@ -120,7 +119,7 @@ export default function Client() {
                         <View className='w-full flex flex-col items-start justify-start'>
                             <Text className="text-black opacity-75 text-2xl">Confirme sua Senha</Text>
                         </View>
-                        <Inpuut widht='381'
+                        <Input widht='381'
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             className='bg-gray-250 w-full h-12 rounded-lg p-2'
                         />

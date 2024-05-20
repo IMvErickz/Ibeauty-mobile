@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
 import { api } from "../../../../lib/axios";
 import { Header } from "../../../components/header";
-import { Inpuut } from "../../../components/Input/input";
+import { Input } from "../../../components/Input/input";
 import { Buttoon } from "../../../components/Buttons/Button";
 import { Link } from "expo-router";
 
@@ -61,8 +61,6 @@ export default function Provider() {
 
             coverUrl = uploadResponse.data.fileUrl
 
-            console.log('IMAGE URL: ', coverUrl)
-
         }
 
         try {
@@ -85,7 +83,6 @@ export default function Provider() {
                 navigation.navigate('auth')
             }
         } catch (error) {
-            console.log(error)
             throw error
         }
     }
@@ -103,13 +100,13 @@ export default function Provider() {
                         <Text className="text-black font-semibold text-4xl">Seus Dados:</Text>
                     </View>
                     <View className="w-60 flex gap-x-4 flex-row items-center justify-center p-5">
-                        <Inpuut
+                        <Input
                             className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             placeholder='Nome do estabelecimento'
                             onChangeText={setName}
                         />
 
-                        <Inpuut
+                        <Input
                             className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             widht={'190'}
                             placeholder='CPF ou CNPJ'
@@ -118,14 +115,14 @@ export default function Provider() {
                     </View>
 
                     <View className="w-60 flex gap-x-4 flex-row items-center justify-center p-5">
-                        <Inpuut
+                        <Input
                             widht={'190'}
                             className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             placeholder='Telefone'
                             onChangeText={setCell}
                         />
 
-                        <Inpuut
+                        <Input
                             className='w-[180px] h-12 rounded-lg text-black bg-[#F1F1F1] border-none'
                             widht={'190'}
                             placeholder='CEP'
@@ -155,7 +152,7 @@ export default function Provider() {
                     </View>
 
                     <View className="w-full flex flex-col items-center justify-center p-5 ">
-                        <Inpuut
+                        <Input
                             widht={'190'}
                             placeholder='Número'
                             onChangeText={setNumber}
@@ -164,18 +161,18 @@ export default function Provider() {
                         <View className="w-full flex flex-col items-start, justify-start">
                             <Text>Email</Text>
                         </View>
-                        <Inpuut onChangeText={setEmail} className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg" />
+                        <Input onChangeText={setEmail} className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg" />
                         <View className="w-full flex flex-col items-start justify-start">
                             <Text>Senha</Text>
                         </View>
-                        <Inpuut onChangeText={setPassword}
+                        <Input onChangeText={setPassword}
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg"
                         />
                         <View className="w-full flex flex-col items-start, justify-start">
                             <Text>Confirme sua senha</Text>
                         </View>
-                        <Inpuut onChangeText={setConfSenha}
+                        <Input onChangeText={setConfSenha}
                             RightIcon={<Eye size={32} color="black" weight="fill" style={{ marginRight: 12 }} />}
                             className="bg-[#F1F1F1] w-full h-12 p-2 rounded-lg"
                         />

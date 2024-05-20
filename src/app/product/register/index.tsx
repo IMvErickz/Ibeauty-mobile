@@ -1,6 +1,6 @@
 import { FormControl, Select, CheckIcon } from "native-base";
 import { Header } from "../../../components/header";
-import { Inpuut } from "../../../components/Input/input";
+import { Input } from "../../../components/Input/input";
 import * as ImagePicker from 'expo-image-picker';
 import { api } from "../../../../lib/axios";
 import { useEffect, useState } from "react";
@@ -23,8 +23,6 @@ export default function NewProduct() {
     const [description, setDesc] = useState('')
     const [category, getCategory] = useState('')
 
-    console.log("URL PREVIEW: ", preview)
-
     async function openImagePicker() {
         try {
             const result: any = await ImagePicker.launchImageLibraryAsync({
@@ -43,7 +41,7 @@ export default function NewProduct() {
     const navigation = useNavigation()
 
     const [id, getId] = useState('')
-    console.log(id)
+
     async function StoreServices() {
         let nameLocal = await SecureStorage.getItemAsync('userId')
         getId(nameLocal as string)
@@ -81,8 +79,6 @@ export default function NewProduct() {
 
             coverUrl = uploadResponse.data.fileUrl
 
-            console.log('IMAGE URL: ', coverUrl)
-
         }
 
         try {
@@ -97,7 +93,6 @@ export default function NewProduct() {
 
             navigation.goBack()
         } catch (error) {
-            console.log(error)
             throw error
         }
     }
@@ -144,7 +139,7 @@ export default function NewProduct() {
                         <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Nome do Serviço:</Text>
                             <View className='w-full flex flex-col items-center justify-center '>
-                                <Inpuut
+                                <Input
                                     className="bg-borderColor rounded-lg w-full h-12 p-2"
                                     onChangeText={setName}
                                 />
@@ -154,7 +149,7 @@ export default function NewProduct() {
                         <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Valor a ser cobrado:</Text>
                             <View className='w-full flex flex-col items-center justify-center '>
-                                <Inpuut
+                                <Input
                                     className="bg-borderColor rounded-lg w-full h-12 p-2"
                                     onChangeText={setPrice}
                                     keyboardType="number-pad"
@@ -187,7 +182,7 @@ export default function NewProduct() {
                         <View className='w-full flex flex-col items-start justify-start gap-y-2'>
                             <Text className='text-xl font-semibold'>Descrição do Serviço</Text>
                             <View className='w-full flex flex-col items-center justify-center '>
-                                <Inpuut
+                                <Input
                                     className="bg-borderColor w-full h-44 rounded-lg"
                                     onChangeText={setDesc}
                                 />

@@ -18,7 +18,6 @@ export function CardProducts({ Name, img, id, Price, ...rest }: CardProps) {
             await AsyncStorage.setItem('idService', id)
             navigation.navigate('Schedule')
         } catch (error) {
-            console.log(error)
             throw error
         }
     }

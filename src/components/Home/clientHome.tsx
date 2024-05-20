@@ -24,11 +24,9 @@ export function ClientHome() {
 
     const [ServicesData, setDataService] = useState<ProvidersProps[]>([])
     const [drawer, setDrawer] = useState('none')
-    console.log("Data", ServicesData)
 
     function openSideBar() {
         setDrawer('flex')
-        console.log(drawer)
     }
 
     useEffect(() => { openSideBar }, [drawer])
