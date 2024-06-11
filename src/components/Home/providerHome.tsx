@@ -10,6 +10,7 @@ import { Buttoon } from "../Buttons/Button"
 import * as SecureStorage from 'expo-secure-store'
 import { api } from "../../../lib/axios"
 import { Link } from "expo-router"
+import { useQuery } from "@tanstack/react-query"
 
 interface SericoProps {
     NameService: string
@@ -24,9 +25,11 @@ interface ServiceProps {
     img: string
 }
 
-export function ProviderHome() {
+interface ResponseProps {
+    services: ServiceProps[]
+}
 
-    const [ProviderData, setDataProvider] = useState<ServiceProps[]>([])
+export function ProviderHome() {
 
     const [providerID, getProviderID] = useState('')
 
@@ -39,12 +42,17 @@ export function ProviderHome() {
         StoreServices()
     }, [])
 
-    const providerDataMemory = useMemo(async () => {
-        await api.get(`/services/${providerID}`)
-            .then(function (response) {
-                setDataProvider(response.data.services)
-            })
-    }, [providerID])
+    async function getProviderServices() {
+        const response = await api.get<ResponseProps>(`/services/${providerID}`)
+
+        return response.data.services
+    }
+
+    const { data: ServiceProps } = useQuery({
+        queryKey: ['provider-services', providerID],
+        queryFn: async () => getProviderServices(),
+        refetchOnWindowFocus: true,
+    })
 
     return (
         <ScrollView className="bg-white">
@@ -58,7 +66,7 @@ export function ProviderHome() {
                         } />
                 </View>
                 <View className='w-full flex items-center justify-center flex-col py-8 bg-white'>
-                    {ProviderData?.map(e => {
+                    {ServiceProps?.map((e) => {
                         return (
                             <>
                                 <View className=' w-full h-max flex flex-row items-center justify-center gap-x-4' key={e.Name}>
@@ -72,7 +80,7 @@ export function ProviderHome() {
                                 </View>
                                 <View className="w-full flex flex-col items-center justify-center">
                                     <Divider my="1" color={'#D9D9D9'} />
-                                    {e.Service.map(service => {
+                                    {e.Service.map((service) => {
                                         return (
                                             <>
                                                 <CardProducts
