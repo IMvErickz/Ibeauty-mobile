@@ -58,12 +58,12 @@ export default function CreateSchedule() {
         resolver: zodResolver(scheduleSchema),
         defaultValues: {
             intervals: [
-                { weekDay: 0, enabled: true, startTime: '08:00', endTime: '18:00' },
+                { weekDay: 0, enabled: false, startTime: '08:00', endTime: '18:00' },
                 { weekDay: 1, enabled: true, startTime: '08:00', endTime: '18:00' },
                 { weekDay: 2, enabled: true, startTime: '08:00', endTime: '18:00' },
                 { weekDay: 3, enabled: true, startTime: '08:00', endTime: '18:00' },
                 { weekDay: 4, enabled: true, startTime: '08:00', endTime: '18:00' },
-                { weekDay: 5, enabled: false, startTime: '08:00', endTime: '18:00' },
+                { weekDay: 5, enabled: true, startTime: '08:00', endTime: '18:00' },
                 { weekDay: 6, enabled: false, startTime: '08:00', endTime: '18:00' },
             ],
         }
@@ -74,7 +74,7 @@ export default function CreateSchedule() {
         name: 'intervals'
     })
 
-    const weekDays = getWeekDays()
+    const weekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
     async function handleCreateSchedule(data: any) {
         const { intervals } = data as ScheduleSchemaOutput

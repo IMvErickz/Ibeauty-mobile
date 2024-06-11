@@ -84,6 +84,7 @@ export function ProviderHome() {
                                         return (
                                             <>
                                                 <CardProducts
+                                                    providerId={providerID}
                                                     key={service.id}
                                                     id={service.id}
                                                     Name={service.NameService}

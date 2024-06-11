@@ -1,22 +1,23 @@
-import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 interface CardProps {
+    providerId: string
     Name: string
     img: string
     id: string
     Price: string
 }
 
-export function CardProducts({ Name, img, id, Price, ...rest }: CardProps) {
+export function CardProducts({ Name, img, id, Price, providerId, ...rest }: CardProps) {
 
-    const navigation = useNavigation()
+    const navigation = useRouter()
 
     async function setIdService() {
         try {
             await AsyncStorage.setItem('idService', id)
-            navigation.navigate('Schedule')
+            navigation.push(`/schedule/${providerId}`)
         } catch (error) {
             throw error
         }

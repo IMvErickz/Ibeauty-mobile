@@ -62,6 +62,7 @@ export default function Store() {
                                     return (
                                         <>
                                             <CardProducts
+                                                providerId={String(id)}
                                                 id={e.id}
                                                 Name={e.NameService}
                                                 img={e.img}
