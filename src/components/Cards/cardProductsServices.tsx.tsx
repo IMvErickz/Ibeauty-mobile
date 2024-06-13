@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
@@ -17,14 +17,14 @@ export function CardProducts({ Name, img, id, Price, providerId, ...rest }: Card
     async function setIdService() {
         try {
             await AsyncStorage.setItem('idService', id)
-            navigation.push(`/schedule/${providerId}`)
+            navigation.push(`/schedule/${providerId}/${id}`)
         } catch (error) {
             throw error
         }
     }
 
     return (
-        <TouchableOpacity className="w-full bg-white border-none" onPress={setIdService}>
+        <Link href={{ pathname: '/schedule', params: { providerId: providerId, serviceId: id } }} className="w-full bg-white border-none">
             <View className="w-full h-28 flex flex-row items-center justify-start space-x-8">
                 <Image
                     source={{ uri: img }}
@@ -42,6 +42,6 @@ export function CardProducts({ Name, img, id, Price, providerId, ...rest }: Card
                     </View>
                 </View>
             </View>
-        </TouchableOpacity>
+        </Link>
     )
 }

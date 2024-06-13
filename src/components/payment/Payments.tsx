@@ -10,8 +10,9 @@ export function Payments(props: PaymentsProps) {
     return (
         <View className="w-full flex items-start">
             <TouchableOpacity
-                className="bg-white w-full justify-start border-t-borderColor border-b-borderColor border-t-2 border-b-2"
+                className="bg-white w-full flex flex-row justify-start border-t-borderColor border-b-borderColor border-t-2 border-b-2"
             >
+                {props.Icon}
                 <Text className="text-black font-bold text-xl">{props.Type}</Text>
             </TouchableOpacity>
         </View>

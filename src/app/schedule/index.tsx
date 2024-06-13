@@ -26,7 +26,8 @@ interface BlockedDateResponse {
 export default function Schedule() {
     const localParam = useLocalSearchParams()
 
-    const { id: providerId } = localParam
+    const { providerId } = localParam
+
     dayjs.locale('pt-br');
 
     const weekDaysNumber = [0, 1, 2, 3, 4, 5, 6]

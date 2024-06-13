@@ -11,22 +11,24 @@ interface AvailableResponse {
 }
 
 export default function Hours() {
-    const { date } = useLocalSearchParams()
+    const params = useLocalSearchParams()
+
+    const { providerId, serviceId, date } = params
 
     async function getAvailableHours(id: string) {
         if (!date) {
             return
         }
         const response = await api.post<AvailableResponse>(`/availability/${id}`, {
-            date: date[0]
+            date: date
         })
 
         return response.data
     }
 
     const { data: availability } = useQuery({
-        queryKey: ['available-hour', date],
-        queryFn: () => getAvailableHours(String(date && date[1]))
+        queryKey: ['available-hour', providerId],
+        queryFn: () => getAvailableHours(String(providerId))
     })
 
     return (

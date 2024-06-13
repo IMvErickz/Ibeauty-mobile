@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { DateContext } from '../../context/DateContex'
-import { useLocalSearchParams, useRouter } from 'expo-router'
+import { Link, useLocalSearchParams, useRouter } from 'expo-router'
 
 interface DayProps {
     day: string
@@ -11,15 +11,10 @@ interface DayProps {
 }
 
 export function ScheduleDay(props: DayProps) {
-    const router = useRouter()
 
     const localParam = useLocalSearchParams()
 
-    const { id: providerId } = localParam
-
-    async function handleSetDateAndPushRouter() {
-        router.push(`/schedule/hour/${props.date}/${providerId}`)
-    }
+    const { providerId, serviceId } = localParam
 
     return (
         <View className="w-full flex flex-col items-center justify-center gap-y-8">
@@ -32,9 +27,9 @@ export function ScheduleDay(props: DayProps) {
                         </View>
                         <Text className="text-2xl text-black">{props.dayNumber}</Text>
                     </View>
-                    <TouchableOpacity onPress={handleSetDateAndPushRouter} className='w-full items-start justify-start bg-transparent'>
+                    <Link href={{ pathname: '/schedule/hour', params: { providerId, serviceId, date: props.date } }} className='w-full items-start justify-start bg-transparent'>
                         <Text className="text-lg font-semibold mt-1">{props.day}, {props.dayNumber}</Text>
-                    </TouchableOpacity>
+                    </Link>
                 </View>
             </View>
         </View>

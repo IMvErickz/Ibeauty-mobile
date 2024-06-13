@@ -25,7 +25,7 @@ export function Buttons() {
     }]
 
     return (
-        <View className='w-full h-full p-5'>
+        <View className='w-full p-5'>
             <View>
                 {paymentsMode.map(pay => {
                     return (
