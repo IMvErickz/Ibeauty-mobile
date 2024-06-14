@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 interface CardProps {
-    providerId: string
+    providerId?: string
     Name: string
     img: string
     id: string

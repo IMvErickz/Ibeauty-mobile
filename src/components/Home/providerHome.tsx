@@ -9,7 +9,7 @@ import { CardProducts } from "../Cards/cardProductsServices.tsx"
 import { Buttoon } from "../Buttons/Button"
 import * as SecureStorage from 'expo-secure-store'
 import { api } from "../../../lib/axios"
-import { Link } from "expo-router"
+import { Link, useLocalSearchParams } from "expo-router"
 import { useQuery } from "@tanstack/react-query"
 
 interface SericoProps {
@@ -30,6 +30,7 @@ interface ResponseProps {
 }
 
 export function ProviderHome() {
+    const {tittle} = useLocalSearchParams()
 
     const [providerID, getProviderID] = useState('')
 
@@ -59,6 +60,7 @@ export function ProviderHome() {
             <View className="w-full h-full flex items-center justify-center">
                 <View className="w-full flex items-center justify-center">
                     <Header
+                        title={String(tittle)}
                         List={
                             <Button className="bg-transparent">
                                 <List size={32} color="#416058" weight="fill" />

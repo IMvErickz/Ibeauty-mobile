@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { VStack, Text, Button } from "native-base";
 import React from "react";
 import { View } from 'react-native'
@@ -7,6 +8,7 @@ export interface HeaderProps {
     ButtonBack?: JSX.Element
     List?: JSX.Element
     ListNavigation?: () => void
+    title?: string
 }
 
 export function Header(props: HeaderProps) {
@@ -19,7 +21,9 @@ export function Header(props: HeaderProps) {
                 {props.ButtonBack}
             </View>
             <View>
-                {props.List}
+                <Link href={`/fold/${props.title}`} asChild>
+                    {props.List}
+                </Link>
             </View>
         </View>
     )

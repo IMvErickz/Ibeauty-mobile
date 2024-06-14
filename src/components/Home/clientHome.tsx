@@ -21,6 +21,7 @@ interface ProvidersProps {
 }
 
 export function ClientHome() {
+    const { tittle } = useLocalSearchParams()
 
     const [ServicesData, setDataService] = useState<ProvidersProps[]>([])
     const [drawer, setDrawer] = useState('none')
@@ -45,7 +46,7 @@ export function ClientHome() {
         <ScrollView className="bg-white">
             <View className="w-full h-full flex items-center justify-center">
                 <View className="w-full flex items-center justify-center">
-                    <Header List={<Button className="bg-transparent">
+                    <Header title={String(tittle)} List={<Button className="bg-transparent">
                         <List size={32} color="#416058" weight="fill" />
                     </Button>} />
                 </View>
