@@ -2,7 +2,10 @@
     "build": {
       "development": {
         "developmentClient": true,
-        "distribution": "internal"
+        "distribution": "internal",
+        "env":{
+            "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
+          }
       },
       "preview": {
         "distribution": "internal",
@@ -13,7 +16,11 @@
             "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
           }
       },
-      "production": {}
+      "production": {
+        "env":{
+            "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
+          }
+      }
     }
   }
   
