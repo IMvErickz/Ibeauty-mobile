@@ -7,6 +7,9 @@
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
+      "android":{
+        "image":"latest"
+      },
       "env":{
             "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
       }
@@ -14,12 +17,18 @@
     "preview": {
       "distribution": "internal",
       "channel": "preview",
+      "android":{
+        "image":"latest"
+      },
       "env":{
             "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
       }
     },
     "production": {
       "channel": "production",
+      "android":{
+        "image":"latest"
+      },
       "env":{
             "EXPO_PUBLIC_API_URL":"http://10.0.0.166:3333"
       }
