@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "IBeauty",
-    "slug": "IBeauty",
+    "name": "Ibeauty_mobile",
+    "slug": "Ibeauty_mobile",
     "version": "1.0.0",
-    "owner":"yerickz",
+    "owner": "yerickz",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ibeauty.ibeauty"
     },
     "android": {
       "package": "com.ibeauty.ibeauty",
