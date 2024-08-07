@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "owner": "yerickz",
     "orientation": "portrait",
-    "icon": "./assets/ico.jpg",
+    "icon": "./assets/ic_launcher.png",
     "userInterfaceStyle": "light",
     "scheme": "myappdrawersexporouter",
     "splash": {
