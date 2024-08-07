@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "owner": "yerickz",
     "orientation": "portrait",
-    "icon": "./assets/ic_launcher.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "myappdrawersexporouter",
     "splash": {
       "image": "./assets/Carregamento.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#E5E5E5"
     },
     "updates": {
