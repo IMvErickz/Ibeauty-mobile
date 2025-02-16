@@ -14,7 +14,7 @@ export default function Index() {
         <View className='h-full w-56 flex bg-[#D7FFF8E5]'>
             <View className='w-full flex pt-20 px-4'>
                 <TouchableOpacity onPress={closeDrawer}>
-                    <X size={30}/>
+                    <X size={30} />
                 </TouchableOpacity>
             </View>
             <View>
