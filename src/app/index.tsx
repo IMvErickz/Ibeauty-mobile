@@ -8,7 +8,7 @@ export default function Home() {
         const { status } = await Notifications.requestPermissionsAsync();
 
         if(status !== 'granted'){
-            console.log('não')
+            console.log('não vai')
         }
         // Verifique se a permissão foi concedida
         const token = await Notifications.getExpoPushTokenAsync();
