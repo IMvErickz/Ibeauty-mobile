@@ -1,11 +1,27 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Link } from 'expo-router';
+import * as Notifications from 'expo-notifications';
 
 
 export default function Home() {
+    async function getExpoPushToken() {
+        const { status } = await Notifications.requestPermissionsAsync();
+
+        if(status !== 'granted'){
+            console.log('não')
+        }
+        // Verifique se a permissão foi concedida
+        const token = await Notifications.getExpoPushTokenAsync();
+        console.log('Expo Push Token:', token.data);
+        return token.data;
+      }
+
 
     return (
         <>
+        <TouchableOpacity onPress={getExpoPushToken} className='flex items-center justify-center'>
+            <Text className='text-white font-bold uppercase text-2xl items-center justify-center'>Pegar</Text>
+         </TouchableOpacity>
             <View className="flex-1 flex-col justify-center items-center bg-backGround bg-[url('../../assets/Bolinhas.png')]">
                 <View className="flex flex-col items-start w-screen p-2">
                     <Text className="text-boldColor font-bold text-2xl">
